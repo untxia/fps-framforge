@@ -1,0 +1,163 @@
+erDiagram
+    UTILISATEUR ||--o{ ABONNEMENT : "souscrit"
+    OFFRE ||--o{ ABONNEMENT : "concerne"
+    ABONNEMENT ||--o{ PAIEMENT : "génère"
+    UTILISATEUR ||--o{ CONFIGURATION : "crée"
+    UTILISATEUR ||--o{ CONVERSATION_IA : "démarre"
+    UTILISATEUR ||--o{ BENCHMARK : "soumet"
+
+    MARQUE ||--o{ COMPOSANT : "fabrique"
+    CATEGORIE ||--o{ COMPOSANT : "classe"
+    COMPOSANT ||--o| GPU : "spécialise"
+    COMPOSANT ||--o| CPU : "spécialise"
+    COMPOSANT ||--o| RAM : "spécialise"
+    COMPOSANT ||--o| CARTE_MERE : "spécialise"
+
+    JEU ||--o{ REGLAGE_RECOMMANDE : "définit"
+    JEU ||--o{ CONFIGURATION : "ciblée par"
+    JEU ||--o{ BENCHMARK : "mesuré sur"
+    JEU ||--o{ PROSPECT : "attendu par"
+
+    COMPOSANT ||--o{ CONFIGURATION : "monté (gpu/cpu/ram/cm)"
+    COMPOSANT ||--o{ BENCHMARK : "testé (gpu/cpu)"
+
+    CONVERSATION_IA ||--o{ MESSAGE_IA : "contient"
+
+    UTILISATEUR {
+        int id_utilisateur PK
+        varchar email UK
+        varchar pseudo
+        varchar mot_de_passe_hash
+        timestamp date_inscription
+        boolean est_actif
+    }
+    OFFRE {
+        int id_offre PK
+        varchar nom
+        smallint niveau
+        decimal prix_mensuel
+        decimal prix_annuel
+        varchar stripe_price_id
+    }
+    ABONNEMENT {
+        int id_abonnement PK
+        int id_utilisateur FK
+        int id_offre FK
+        date date_debut
+        date date_fin
+        varchar statut
+        varchar periodicite
+        varchar stripe_subscription_id
+    }
+    PAIEMENT {
+        int id_paiement PK
+        int id_abonnement FK
+        decimal montant
+        timestamp date_paiement
+        varchar statut
+        varchar stripe_payment_id
+    }
+    MARQUE {
+        int id_marque PK
+        varchar nom
+    }
+    CATEGORIE {
+        int id_categorie PK
+        varchar nom
+    }
+    COMPOSANT {
+        int id_composant PK
+        int id_marque FK
+        int id_categorie FK
+        varchar nom
+        decimal score_perf
+        varchar lien_achat
+    }
+    GPU {
+        int id_composant PK,FK
+        smallint vram_go
+        smallint tdp_w
+    }
+    CPU {
+        int id_composant PK,FK
+        smallint nb_coeurs
+        decimal frequence_ghz
+        varchar socket
+    }
+    RAM {
+        int id_composant PK,FK
+        smallint capacite_go
+        varchar type_ddr
+        int frequence_mhz
+        smallint latence_cl
+    }
+    CARTE_MERE {
+        int id_composant PK,FK
+        varchar chipset
+        varchar socket
+        boolean support_rebar
+    }
+    JEU {
+        int id_jeu PK
+        varchar nom
+        boolean est_disponible
+        decimal coef_gpu
+        decimal coef_cpu
+        varchar type_limitation
+        date date_ajout
+    }
+    REGLAGE_RECOMMANDE {
+        int id_reglage PK
+        int id_jeu FK
+        varchar libelle
+        varchar valeur
+        smallint ordre_affichage
+    }
+    CONFIGURATION {
+        int id_configuration PK
+        int id_utilisateur FK
+        int id_jeu FK
+        int id_gpu FK
+        int id_cpu FK
+        int id_ram FK
+        int id_carte_mere FK
+        smallint resolution
+        smallint preset
+        int fps_estime
+        int fps_1low_estime
+        varchar goulot
+        timestamp date_creation
+    }
+    BENCHMARK {
+        int id_benchmark PK
+        int id_utilisateur FK
+        int id_jeu FK
+        int id_gpu FK
+        int id_cpu FK
+        smallint resolution
+        smallint preset
+        int fps_moyen
+        int fps_1low
+        timestamp date_mesure
+        varchar source
+    }
+    CONVERSATION_IA {
+        int id_conversation PK
+        int id_utilisateur FK
+        varchar palier
+        timestamp date_debut
+    }
+    MESSAGE_IA {
+        int id_message PK
+        int id_conversation FK
+        varchar role
+        text contenu
+        timestamp date_envoi
+    }
+    PROSPECT {
+        int id_prospect PK
+        int id_jeu FK
+        varchar email
+        timestamp date_inscription
+        boolean a_consenti
+    }

@@ -1,0 +1,13 @@
+node_modules/
+images/
+.env
+.env.*
+.DS_Store
+# archives locales (regeneres / non versionnes)
+pages-seo-reglages.zip
+frameforge-repo.zip
+# anciennes versions de travail
+mcd-frameforge.mermaid
+mld-frameforge.mermaid
+frameforge.sql
+conception-bdd-frameforge.md

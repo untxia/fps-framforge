@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FRAMEFORGE — Tune your rig, gain FPS in competitive games</title>
+<meta name="description" content="FRAMEFORGE analyzes your GPU, CPU, motherboard and RAM and gives you the exact settings (BIOS + in-game) to maximize FPS in CS2, Valorant, Apex and more. Free configurator + AI assistant." />
+<link rel="canonical" href="https://frameforge.example.com/en.html" />
+<link rel="alternate" hreflang="fr" href="https://frameforge.example.com/" />
+<link rel="alternate" hreflang="en" href="https://frameforge.example.com/en.html" />
+<meta property="og:title" content="FRAMEFORGE — Turn your rig into frames" />
+<meta property="og:description" content="The exact settings to turn your hardware into frames in competitive games." />
+<meta property="og:image" content="https://frameforge.example.com/og-image.png" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#080b11;--panel:#0e1320;--line:rgba(120,200,255,.12);--lineS:rgba(120,200,255,.25);--sig:#19d6ff;--heat:#ff7a2f;--txt:#e9eef7;--mut:#8593a8}
+  *{margin:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;line-height:1.65;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:54px 54px}
+  .w{max-width:960px;margin:0 auto;padding:0 22px}
+  nav{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .brand{font-family:'Space Grotesk';font-weight:700;display:flex;gap:10px;align-items:center}
+  .dot{width:9px;height:9px;border-radius:2px;background:var(--sig);box-shadow:0 0 12px var(--sig)}
+  nav a{color:var(--mut);font-family:'JetBrains Mono';font-size:.78rem;text-decoration:none}
+  nav a:hover{color:var(--sig)}
+  header{padding:90px 0 60px;text-align:center}
+  .eyebrow{font-family:'JetBrains Mono';font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sig)}
+  h1{font-family:'Space Grotesk';font-size:clamp(2.4rem,7vw,4.2rem);line-height:1.05;margin:18px 0}
+  h1 .k{color:var(--sig)} h1 .h{color:var(--heat)}
+  .lead{color:var(--mut);max-width:34em;margin:0 auto 30px;font-size:1.08rem}
+  .cta{display:inline-block;background:var(--sig);color:#00121a;font-family:'JetBrains Mono';font-weight:700;text-decoration:none;padding:14px 28px;border-radius:10px}
+  .cta:hover{box-shadow:0 8px 34px rgba(25,214,255,.4)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:50px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-family:'Space Grotesk';font-size:1.05rem;margin-bottom:6px;color:var(--sig)}
+  .card p{color:var(--mut);font-size:.88rem}
+  @media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.grid{grid-template-columns:1fr}}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-bottom:60px}
+  .plan{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
+  .plan.pro{border-color:var(--sig)}
+  .plan .p{font-family:'Space Grotesk';font-size:2rem;font-weight:700;margin:8px 0}
+  .plan .n{font-family:'JetBrains Mono';font-size:.72rem;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
+  .plan ul{list-style:none;color:var(--mut);font-size:.86rem;margin-top:12px}
+  .plan li{padding:4px 0}
+  @media(max-width:700px){.plans{grid-template-columns:1fr}}
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-family:'JetBrains Mono';font-size:.74rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer a{color:var(--mut)} footer a:hover{color:var(--sig)}
+  .note{text-align:center;color:var(--mut);font-size:.8rem;padding-bottom:40px}
+</style>
+</head>
+<body>
+<div class="w">
+  <nav>
+    <div class="brand"><span class="dot"></span>FRAMEFORGE</div>
+    <a href="/">🇫🇷 Version française</a>
+  </nav>
+  <header>
+    <span class="eyebrow">Hardware optimization · esports</span>
+    <h1>Turn your rig into <span class="k">frames</span>.<br>Not <span class="h">regrets</span>.</h1>
+    <p class="lead">FRAMEFORGE analyzes your GPU, CPU, motherboard and RAM, then gives you the exact BIOS and in-game settings to climb in FPS on competitive games — CS2, Valorant, Apex, Fortnite, Rocket League and more.</p>
+    <a class="cta" href="/#configurateur">Open the free configurator →</a>
+    <p class="note" style="margin-top:14px">The full app is currently in French — English version coming soon.</p>
+  </header>
+  <div class="grid">
+    <div class="card"><h3>GPU</h3><p>Frequency/voltage curve, power limit, driver performance mode and upscaling.</p></div>
+    <div class="card"><h3>CPU</h3><p>PBO, undervolting, core affinity and Windows power plans — where esports FPS is won.</p></div>
+    <div class="card"><h3>Motherboard</h3><p>Resizable BAR, XMP/EXPO profiles, C-states and BIOS updates nobody touches.</p></div>
+    <div class="card"><h3>RAM</h3><p>Frequency, timings and latency. Bad RAM tuning kills your 1% lows.</p></div>
+  </div>
+  <div class="plans">
+    <div class="plan"><div class="n">Free</div><div class="p">€0</div><ul><li>Base FPS configurator</li><li>Bottleneck detection</li><li>Basic AI assistant</li></ul></div>
+    <div class="plan pro"><div class="n">Pro</div><div class="p">€4.99<span style="font-size:.9rem;color:var(--mut)">/mo</span></div><ul><li>All competitive games</li><li>Detailed BIOS &amp; RAM settings</li><li>Saved profiles</li></ul></div>
+    <div class="plan"><div class="n">Elite</div><div class="p">€9.99<span style="font-size:.9rem;color:var(--mut)">/mo</span></div><ul><li>Everything in Pro</li><li>Expert AI optimization plan</li><li>Priority support</li></ul></div>
+  </div>
+  <footer>
+    <span>© 2026 FRAMEFORGE</span>
+    <span><a href="/">Français</a> · <a href="/guides/index.html">BIOS guides (FR)</a></span>
+  </footer>
+</div>
+</body>
+</html>
