@@ -652,8 +652,15 @@
       <div class="auth-tabs"><button id="tabLogin" class="on" type="button">Connexion</button><button id="tabSignup" type="button">Inscription</button></div>
       <div id="authMsg" class="auth-msg"></div>
       <div class="auth-field" id="pseudoField" style="display:none"><label>Pseudo</label><input id="authPseudo" type="text" autocomplete="username" /></div>
-      <div class="auth-field"><label>Email</label><input id="authEmail" type="email" autocomplete="email" /></div>
-      <div class="auth-field"><label>Mot de passe</label><input id="authPass" type="password" autocomplete="current-password" /></div>
+      <div class="auth-field"><label>Email</label><input id="authEmail" type="email" autocomplete="email" /><div class="auth-field-err" id="authEmailErr"></div></div>
+      <div class="auth-field"><label>Mot de passe</label>
+        <div class="auth-pass-wrap">
+          <input id="authPass" type="password" autocomplete="current-password" />
+          <button type="button" id="authPassToggle" class="auth-pass-eye" aria-label="Afficher le mot de passe" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="eye-open" d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle class="eye-open" cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path class="eye-closed" d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.5 6.7C4 8.3 1 12 1 12s4 7 11 7c1.9 0 3.6-.5 5-1.2M17.4 17.4C20 15.8 23 12 23 12s-1.6-2.8-4.4-4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
       <button id="authSubmit" class="auth-submit" type="button">Se connecter</button>
       <p class="auth-note">Tes identifiants sont envoyés à ton API (auth.js). Sans backend déployé, la connexion ne fonctionnera pas — c'est normal en démo.</p>
     </div>
@@ -1430,8 +1437,27 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   const tabL=document.getElementById("tabLogin"), tabS=document.getElementById("tabSignup");
   const pseudoField=document.getElementById("pseudoField"), submit=document.getElementById("authSubmit");
   const emailI=document.getElementById("authEmail"), passI=document.getElementById("authPass"), pseudoI=document.getElementById("authPseudo");
+  const emailErr=document.getElementById("authEmailErr"), passToggle=document.getElementById("authPassToggle");
   if(!modal||!btn) return;
   let mode="login";
+  const EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  function emailValid(){ return EMAIL_RE.test(emailI.value.trim()); }
+  function checkEmail(showWhenEmpty){
+    const v=emailI.value.trim();
+    const bad=v.length>0 && !EMAIL_RE.test(v);
+    emailI.classList.toggle("invalid",bad);
+    if(bad){ emailErr.textContent=FF_T("Adresse email invalide."); emailErr.classList.add("show"); }
+    else{ emailErr.textContent=""; emailErr.classList.remove("show"); }
+    return !bad && (v.length>0 || !showWhenEmpty);
+  }
+  emailI.addEventListener("input",()=>checkEmail(false));
+  emailI.addEventListener("blur",()=>checkEmail(false));
+  if(passToggle)passToggle.onclick=()=>{
+    const show=passI.type==="password";
+    passI.type=show?"text":"password";
+    passToggle.setAttribute("aria-pressed",show?"true":"false");
+    passToggle.setAttribute("aria-label",FF_T(show?"Masquer le mot de passe":"Afficher le mot de passe"));
+  };
   function loadU(){try{const t=localStorage.getItem("ff_token");const u=JSON.parse(localStorage.getItem("ff_user")||"null");if(t&&u)FF_USER=u;}catch(e){}}
   function saveU(t,u){try{localStorage.setItem("ff_token",t);localStorage.setItem("ff_user",JSON.stringify(u));}catch(e){}FF_USER=u;}
   function logout(){try{localStorage.removeItem("ff_token");localStorage.removeItem("ff_user");}catch(e){}FF_USER=null;updateUI();}
@@ -1453,6 +1479,7 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   submit.onclick=async()=>{
     const email=(emailI.value||"").trim(), pass=passI.value||"", pseudo=(pseudoI.value||"").trim();
     if(!email||!pass){msg.style.color="var(--heat)";msg.textContent=FF_T("Email et mot de passe requis.");return;}
+    if(!emailValid()){checkEmail(true);msg.style.color="var(--heat)";msg.textContent=FF_T("Adresse email invalide.");emailI.focus();return;}
     if(mode==="signup" && pass.length<6){msg.style.color="var(--heat)";msg.textContent=FF_T("Mot de passe : 6 caractères minimum.");return;}
     msg.style.color="var(--muted)";msg.textContent=FF_T("Veuillez patienter…");
     try{
@@ -1671,6 +1698,7 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     "Se connecter":"Log in","Créer mon compte":"Create my account","Déconnexion (":"Log out (",
     "Tes identifiants sont envoyés à ton API (auth.js). Sans backend déployé, la connexion ne fonctionnera pas — c'est normal en démo.":"Your credentials are sent to your API (auth.js). Without a deployed backend, login won't work — that's expected in demo mode.",
     "Email et mot de passe requis.":"Email and password required.","Mot de passe : 6 caractères minimum.":"Password: 6 characters minimum.",
+    "Adresse email invalide.":"Invalid email address.","Afficher le mot de passe":"Show password","Masquer le mot de passe":"Hide password",
     "Veuillez patienter…":"Please wait…","Échec de la connexion.":"Login failed.",
     "Aucun backend joignable (normal en démo). Déploie l'API auth.js.":"No backend reachable (expected in demo). Deploy the auth.js API.",
     "Connecte-toi pour t'abonner.":"Sign in to subscribe.","Impossible de démarrer le paiement.":"Couldn't start the payment.",
@@ -1744,7 +1772,7 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     const ATTR=[["#aiText","placeholder"],["#aiSend","aria-label"],["#aiFab","aria-label"],["#aiPanel","aria-label"],
       ["#aiClose","aria-label"],[".modal-x","aria-label"],["#delProf","title"],["#benchFps","placeholder"],["#benchFps","aria-label"],
       ["#resToggle","aria-label"],["#vedTabs","aria-label"],["#cookie","aria-label"],
-      [".nav-burger","aria-label"],["nav","aria-label"],["#profSel","aria-label"],["#ntEmail","aria-label"],["#ntEmail","placeholder"]];
+      [".nav-burger","aria-label"],["nav","aria-label"],["#profSel","aria-label"],["#ntEmail","aria-label"],["#ntEmail","placeholder"],["#authPassToggle","aria-label"]];
     ATTR.forEach(([sel,attr])=>{
       document.querySelectorAll(sel).forEach(el=>{
         const storeAttr="data-frsrc-"+attr;
