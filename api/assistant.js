@@ -1,10 +1,10 @@
-// api/assistant.js — proxy IA sécurisé (xAI / Grok) AVEC contrôle du palier côté serveur.
+// api/assistant.js — proxy IA sécurisé (Groq) AVEC contrôle du palier côté serveur.
 // La clé reste serveur. Le palier n'est PAS décidé par le client : il est plafonné par la base.
 //
 // Variable d'environnement requise (à créer dans Vercel, JAMAIS dans un fichier versionné) :
-//   XAI_API_KEY = xai-...        (console : https://console.x.ai)
+//   GROQ_API_KEY = gsk_...              (console : https://console.groq.com/keys)
 // Optionnel :
-//   XAI_MODEL   = grok-3-mini    (par défaut ; ex. grok-3, grok-4)
+//   GROQ_MODEL   = llama-3.3-70b-versatile   (par défaut ; ex. llama-3.1-8b-instant)
 //
 // Front (prod) -> POST /api/assistant  body:{ messages, tier, ctx }  + header Authorization: Bearer <token utilisateur>
 import jwt from "jsonwebtoken";
@@ -42,9 +42,9 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
 
-  const KEY = process.env.XAI_API_KEY;
-  if (!KEY) return res.status(500).json({ error: "XAI_API_KEY manquante côté serveur" });
-  const MODEL = process.env.XAI_MODEL || "grok-3-mini";
+  const KEY = process.env.GROQ_API_KEY;
+  if (!KEY) return res.status(500).json({ error: "GROQ_API_KEY manquante côté serveur" });
+  const MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
       + "Réponds en français, clair et actionnable, sans conseils dangereux (pas d'overvolt extrême). N'invente pas de chiffres de benchmark précis."
       + instructions(eff);
 
-    // Format OpenAI-compatible (xAI) : le system prompt est un message "system"
+    // Format OpenAI-compatible (Groq) : le system prompt est un message "system"
     const msgs = [{ role: "system", content: systeme }].concat(
       messages.slice(-12).map(m => ({
         role: m.role === "assistant" ? "assistant" : "user",
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
       }))
     );
 
-    const r = await fetch("https://api.x.ai/v1/chat/completions", {
+    const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: { "content-type": "application/json", "authorization": "Bearer " + KEY },
       body: JSON.stringify({ model: MODEL, max_tokens: 1000, messages: msgs }),
@@ -78,8 +78,8 @@ export default async function handler(req, res) {
     const raw = await r.text();
     let data; try { data = JSON.parse(raw); } catch (e) { data = null; }
     if (!r.ok) {
-      console.error("xAI error", r.status, raw);
-      return res.status(r.status).json({ error: data?.error?.message || data?.error || raw.slice(0, 500) || "Erreur xAI" });
+      console.error("Groq error", r.status, raw);
+      return res.status(r.status).json({ error: data?.error?.message || data?.error || raw.slice(0, 500) || "Erreur Groq" });
     }
 
     // Réponse normalisée pour le front : { reply }

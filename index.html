@@ -1718,7 +1718,7 @@ if(!reduced){
       else bot(data.error?("⚠️ "+data.error):"Hmm, pas de réponse là. Reformule ta question ?");
     }catch(e){
       typing.remove();
-      bot("⚠️ L'assistant a besoin de ton backend Grok en ligne. En démo local il ne répond pas ; une fois déployé sur Vercel avec ta clé XAI_API_KEY, il fonctionnera.");
+      bot("⚠️ L'assistant a besoin de ton backend en ligne. En démo local il ne répond pas ; une fois déployé sur Vercel avec ta clé GROQ_API_KEY, il fonctionnera.");
     }
     busy=false; send.disabled=false; input.focus();
   }
