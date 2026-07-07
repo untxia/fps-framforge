@@ -2,8 +2,8 @@
 
 > Journal de développement du projet. Mis à jour à chaque étape.
 > **Projet** : site vitrine d'optimisation des FPS pour le jeu compétitif sur PC (GPU / CPU / carte mère / RAM).
-> **Stack** : HTML/CSS/JS autonome · API Anthropic (assistant IA) · Stripe (abonnements) · PostgreSQL (BDD) · Merise (conception).
-> **Dernière mise à jour : 29 juin 2026.**
+> **Stack** : HTML/CSS/JS autonome · API Groq (assistant IA) · Stripe (abonnements) · PostgreSQL/Supabase (BDD) · Resend (emails) · Merise (conception).
+> **Dernière mise à jour : 7 juillet 2026.**
 
 ---
 
@@ -142,6 +142,29 @@
 - **SEO renforce** : donnees structurees **FAQPage** (rich results Google), **index /reglages/** genere (hub de maillage interne pour les 572 pages), lien "Tous les reglages" au pied de page, sitemap complete.
 - **Accessibilite (a11y)** : landmark `<main>` + skip-link, labels relies aux champs (for/id), groupe resolution ARIA, FAQ avec aria-expanded, contraste du texte discret releve, Echap ferme la modale de connexion, tout reste compatible prefers-reduced-motion.
 - **Scroll inertiel premium (style Alpine)** : defilement fluide avec inertie a la molette + ancres animees, desktop uniquement (tactile natif), desactive si animations reduites.
+### v2.1 — Nettoyage, traduction complète, mise en production
+**Nettoyage du dépôt :**
+- Dossier dupliqué `fps-framforge/fps-framforge/` supprimé, fichiers backend rangés dans `api/` (convention Vercel), puis `api/_lib/` pour les modules partagés (db, email, ratelimit, tier) — le plan Vercel Hobby compte chaque fichier de `api/` comme une fonction (limite 12), ça a fait passer le compte de 13 à 9.
+- CSS extrait de `index.html` vers `style.css` (fichier séparé, plus facile à maintenir).
+- Assistant IA migré d'un appel client direct (Anthropic, sans clé = non fonctionnel) vers un vrai backend sécurisé, puis de xAI/Grok vers **Groq** (clé fournie était `gsk_...`, pas `xai-...` — deux services différents malgré le nom proche).
+
+**Traduction FR/EN complète :**
+- Le bouton EN ne traduisait qu'une cinquantaine de phrases (nav/hero/FAQ/footer). Étendu à tout le site : configurateur, réglages des 14 jeux, benchmark, carte de score, builds vedettes, FAQ, légal, chat IA, comptes, écran de démarrage. L'assistant IA répond aussi en anglais quand l'interface l'est.
+- Corrigé au passage : `[].slice.call(params.keys())` ne fonctionne pas sur un itérateur `URLSearchParams` (bug pré-existant) — les liens de config partagée ne restauraient jamais rien, et le splash ne s'effaçait jamais sur les liens profonds.
+
+**Formulaire de connexion :**
+- Validation d'email en temps réel (bordure rouge + message), bouton œil pour afficher/masquer le mot de passe.
+
+**Nouvelles fonctionnalités backend :**
+- **Mot de passe oublié** + **vérification d'email** via Resend (jetons à usage unique, expiration 1h/24h).
+- **Rate limiting** réutilisant la base Postgres existante (pas de service externe) : 20 req/10min sur l'assistant et l'auth.
+- **FPS réels communautaires réservés Pro/Elite** : l'endpoint `GET /api/benchmark` existait mais n'était jamais utilisé côté front ni protégé — maintenant affiché automatiquement dans le configurateur (vérifié côté serveur via le JWT, comme l'assistant IA).
+- `api/tier.js` : résolution du palier utilisateur factorisée (réutilisée par assistant.js et benchmark.js).
+
+**Mise en production (en cours) :**
+- Base **Supabase** provisionnée (projet `frameforge`, région eu-west-3, schéma complet + RLS activée sur les 20 tables + fix des fonctions à search_path mutable).
+- Diagnostic en cours du dernier obstacle : connexion Vercel → Supabase (adresse directe `db.xxx.supabase.co` incompatible IPv6/Vercel → bascule vers le pooler `aws-0-eu-west-3.pooler.supabase.com:6543`), puis erreur de mot de passe à résoudre en réinitialisant depuis le dashboard Supabase.
+
 ## ✅ État d'avancement
 - [x] Site vitrine complet et responsive (mobile → 8K)
 - [x] Configurateur FPS + catalogue + liens d'achat
@@ -150,27 +173,33 @@
 - [x] SEO, légal, accessibilité
 - [x] Modélisation BDD (MCD / MLD / MPD)
 - [x] Backends assistant + paiement (à brancher)
-- [ ] Déploiement (Netlify/Vercel)
+- [x] Déploiement (Vercel) — site en ligne, en cours de finalisation
 - [x] Front comptes + verrouillage des paliers cote serveur (code)
 - [x] Stripe cote front + webhook d'activation (code)
 - [x] Image de partage (og-image.png) + config centralisee
-- [ ] Cle API + rate limit pour l'assistant en prod
-- [ ] Stripe : produits, prix, webhook d'activation des paliers
+- [x] Cle API + rate limit pour l'assistant en prod (Groq + rate limit maison)
+- [ ] Stripe : produits, prix, webhook d'activation des paliers (mode live)
 - [x] Détection GPU · carte de score · affiliation · newsletter branchable
 - [x] Fichiers backend (auth, db, webhook, benchmark) + infra (vercel.json, robots, sitemap, 404) + guide de déploiement
 - [x] Splash memorisee · sobriete effets · bascule images locales + script
 - [x] 384 pages SEO + sitemap · guides BIOS · landing EN · soumission FPS reels
 - [ ] Images passées en local (WebP) — lancer telecharge-images.sh
-- [ ] Vraies données de benchmark
+- [x] Vraies données de benchmark — réservées aux comptes Pro/Elite, affichées dans le configurateur
 - [x] Pages SEO programmatiques (generees)
+- [x] Traduction FR/EN complète (tout le site, plus juste la nav/hero)
+- [x] Mot de passe oublié + vérification email (Resend)
+- [x] Base de données Supabase provisionnée (schéma + RLS)
+- [ ] Connexion Vercel ↔ Supabase finalisée (pooler + mot de passe à resynchroniser)
+- [ ] Mentions légales / CGV / Confidentialité : infos réelles (attend l'immatriculation auto-entrepreneur)
+- [ ] Nom de domaine à acheter et brancher
 
 ---
 
 ## 🔜 Prochaines pistes
-1. Déployer une première version en ligne.
-2. Brancher l'assistant sur `/api/assistant` + limiter le débit.
-3. Mettre en place le paiement Stripe de bout en bout.
-4. Remplacer les estimations par de vraies données de perf.
-5. Générer les pages SEO par jeu × composant.
+1. Finaliser la connexion Vercel ↔ Supabase (réinitialiser le mot de passe DB, mettre à jour `DATABASE_URL` avec l'URL du pooler).
+2. Renseigner `RESEND_API_KEY` pour activer les emails (vérification / mot de passe oublié).
+3. Mettre en place le paiement Stripe en mode live (produits, prix, webhook).
+4. S'immatriculer (auto-entrepreneur) puis compléter les pages légales avec les vraies infos.
+5. Acheter un nom de domaine et le brancher sur Vercel.
 
 *(Ce carnet est complété à chaque nouvelle action sur le projet.)*
