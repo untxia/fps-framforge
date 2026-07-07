@@ -3,6 +3,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { query } from "./db.js";
+import { limiteAtteinte, ipDe } from "./ratelimit.js";
+import { envoyerEmail } from "./email.js";
+import crypto from "crypto";
 
 async function tierDe(id) {
   const r = await query(
@@ -15,10 +18,28 @@ async function tierDe(id) {
   return r.rows[0] ? r.rows[0].tier : "gratuit";
 }
 
+async function envoyerVerificationEmail(id_utilisateur, email) {
+  const jeton = crypto.randomBytes(32).toString("hex");
+  const hash = crypto.createHash("sha256").update(jeton).digest("hex");
+  const expire = new Date(Date.now() + 24 * 3600 * 1000);
+  await query(
+    `INSERT INTO jeton_action (id_utilisateur, type, jeton_hash, expire_le) VALUES ($1,'verification_email',$2,$3)`,
+    [id_utilisateur, hash, expire]
+  );
+  const site = process.env.SITE_URL || "";
+  const lien = site + "/?verify=" + jeton;
+  await envoyerEmail(email, "Confirme ton email FRAMEFORGE",
+    `<p>Bienvenue sur FRAMEFORGE !</p><p>Confirme ton adresse email en cliquant sur ce lien (valable 24h) :</p><p><a href="${lien}">${lien}</a></p>`
+  );
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
   const SECRET = process.env.JWT_SECRET;
   if (!SECRET) return res.status(500).json({ error: "JWT_SECRET manquant" });
+  if (await limiteAtteinte("auth", ipDe(req), 20, 600)) {
+    return res.status(429).json({ error: "Trop de tentatives, réessaie dans quelques minutes." });
+  }
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
     const { action, email, pseudo, password } = body;
@@ -33,12 +54,13 @@ export default async function handler(req, res) {
       );
       const u = r.rows[0];
       const token = jwt.sign({ id: u.id_utilisateur, email: u.email }, SECRET, { expiresIn: "7d" });
-      return res.status(201).json({ token, user: { ...u, tier: "gratuit" } });
+      envoyerVerificationEmail(u.id_utilisateur, u.email).catch(() => {});
+      return res.status(201).json({ token, user: { ...u, tier: "gratuit", email_verifie: false } });
     }
 
     if (action === "login") {
       const r = await query(
-        `SELECT id_utilisateur, email, pseudo, mot_de_passe_hash FROM utilisateur WHERE email=$1`,
+        `SELECT id_utilisateur, email, pseudo, mot_de_passe_hash, email_verifie FROM utilisateur WHERE email=$1`,
         [email.toLowerCase()]
       );
       if (!r.rows.length) return res.status(401).json({ error: "Identifiants invalides" });
@@ -47,7 +69,7 @@ export default async function handler(req, res) {
       if (!ok) return res.status(401).json({ error: "Identifiants invalides" });
       const token = jwt.sign({ id: u.id_utilisateur, email: u.email }, SECRET, { expiresIn: "7d" });
       const tier = await tierDe(u.id_utilisateur);
-      return res.status(200).json({ token, user: { id_utilisateur: u.id_utilisateur, email: u.email, pseudo: u.pseudo, tier } });
+      return res.status(200).json({ token, user: { id_utilisateur: u.id_utilisateur, email: u.email, pseudo: u.pseudo, tier, email_verifie: u.email_verifie } });
     }
     return res.status(400).json({ error: "action inconnue (signup|login)" });
   } catch (e) {

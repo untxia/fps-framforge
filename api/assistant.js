@@ -9,6 +9,7 @@
 // Front (prod) -> POST /api/assistant  body:{ messages, tier, ctx }  + header Authorization: Bearer <token utilisateur>
 import jwt from "jsonwebtoken";
 import { query } from "./db.js";
+import { limiteAtteinte, ipDe } from "./ratelimit.js";
 
 const ORDER = { gratuit: 0, pro: 1, elite: 2 };
 const NAME = ["gratuit", "pro", "elite"];
@@ -52,6 +53,10 @@ export default async function handler(req, res) {
   const KEY = process.env.GROQ_API_KEY;
   if (!KEY) return res.status(500).json({ error: "GROQ_API_KEY manquante côté serveur" });
   const MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
+
+  if (await limiteAtteinte("assistant", ipDe(req), 20, 600)) {
+    return res.status(429).json({ error: "Trop de requêtes, réessaie dans quelques minutes." });
+  }
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});

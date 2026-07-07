@@ -661,8 +661,22 @@
           </button>
         </div>
       </div>
+      <button id="authForgotLink" type="button" class="auth-forgot-link">Mot de passe oublié ?</button>
       <button id="authSubmit" class="auth-submit" type="button">Se connecter</button>
       <p class="auth-note">Tes identifiants sont envoyés à ton API (auth.js). Sans backend déployé, la connexion ne fonctionnera pas — c'est normal en démo.</p>
+    </div>
+    <div class="modal-body" id="authForgotBody" style="display:none">
+      <p class="auth-forgot-intro">Indique ton email, on t'envoie un lien pour choisir un nouveau mot de passe.</p>
+      <div class="auth-field"><label>Email</label><input id="forgotEmail" type="email" autocomplete="email" /></div>
+      <div id="forgotMsg" class="auth-msg"></div>
+      <button id="forgotSubmit" class="auth-submit" type="button">Envoyer le lien</button>
+      <button id="forgotBack" type="button" class="auth-forgot-link">← Retour à la connexion</button>
+    </div>
+    <div class="modal-body" id="authResetBody" style="display:none">
+      <p class="auth-forgot-intro">Choisis ton nouveau mot de passe.</p>
+      <div class="auth-field"><label>Nouveau mot de passe</label><input id="resetPass" type="password" autocomplete="new-password" /></div>
+      <div id="resetMsg" class="auth-msg"></div>
+      <button id="resetSubmit" class="auth-submit" type="button">Valider</button>
     </div>
   </div>
 </div>
@@ -902,7 +916,7 @@ function syncSelects(){
 function clampInt(v,max,def){v=parseInt(v);return (isNaN(v)||v<0||v>max)?def:v;}
 function restoreFromURL(){
   const p=new URLSearchParams(location.search);
-  if(![].slice.call(p.keys()).length)return;
+  if(p.entries().next().done)return;
   state.gpu=clampInt(p.get("g"),GPUS.length-1,state.gpu);
   state.cpu=clampInt(p.get("c"),CPUS.length-1,state.cpu);
   state.ram=clampInt(p.get("r"),RAMS.length-1,state.ram);
@@ -1271,7 +1285,7 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   const params=new URLSearchParams(location.search);
   const force=params.get("splash")==="1"; // astuce : ajoute ?splash=1 a l URL pour revoir la page d accueil
   let deja=false; try{deja=sessionStorage.getItem("ff_splash2")==="1";}catch(e){}
-  if(!force && ([].slice.call(params.keys()).length || deja)){ sp.remove(); return; } // lien partagé ou déjà vue cette session -> entrée directe
+  if(!force && (!params.entries().next().done || deja)){ sp.remove(); return; } // lien partagé ou déjà vue cette session -> entrée directe
   document.body.style.overflow="hidden";
   /* ---- Scène 3D : PC gamer full RGB (Three.js) ---- */
   function buildPC(cv){
@@ -1438,8 +1452,17 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   const pseudoField=document.getElementById("pseudoField"), submit=document.getElementById("authSubmit");
   const emailI=document.getElementById("authEmail"), passI=document.getElementById("authPass"), pseudoI=document.getElementById("authPseudo");
   const emailErr=document.getElementById("authEmailErr"), passToggle=document.getElementById("authPassToggle");
+  const forgotLink=document.getElementById("authForgotLink"), mainBody=document.querySelector("#authModal .modal-body");
+  const forgotBody=document.getElementById("authForgotBody"), forgotEmailI=document.getElementById("forgotEmail"),
+        forgotMsg=document.getElementById("forgotMsg"), forgotSubmit=document.getElementById("forgotSubmit"), forgotBack=document.getElementById("forgotBack");
+  const resetBody=document.getElementById("authResetBody"), resetPassI=document.getElementById("resetPass"),
+        resetMsg=document.getElementById("resetMsg"), resetSubmit=document.getElementById("resetSubmit");
   if(!modal||!btn) return;
-  let mode="login";
+  let mode="login", resetToken=null;
+  function showPane(pane){
+    [mainBody,forgotBody,resetBody].forEach(p=>{if(p)p.style.display="none";});
+    pane.style.display="block";
+  }
   const EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   function emailValid(){ return EMAIL_RE.test(emailI.value.trim()); }
   function checkEmail(showWhenEmpty){
@@ -1468,7 +1491,7 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   }
   window.FF_authRefresh=updateUI;
   function setMode(m){mode=m;const login=m==="login";title.textContent=login?FF_T("Connexion"):FF_T("Inscription");submit.textContent=login?FF_T("Se connecter"):FF_T("Créer mon compte");pseudoField.style.display=login?"none":"block";tabL.classList.toggle("on",login);tabS.classList.toggle("on",!login);}
-  function open(m,text){setMode(m||"login");msg.style.color="var(--muted)";msg.textContent=text||"";modal.classList.add("open");modal.setAttribute("aria-hidden","false");setTimeout(()=>emailI.focus(),150);}
+  function open(m,text){setMode(m||"login");showPane(mainBody);msg.style.color="var(--muted)";msg.textContent=text||"";modal.classList.add("open");modal.setAttribute("aria-hidden","false");setTimeout(()=>emailI.focus(),150);}
   function close(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}
   window.FF_openAuth=open;
   btn.onclick=()=>{ if(FF_USER)logout(); else open("login"); };
@@ -1490,6 +1513,50 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
       updateUI();close();
     }catch(e){msg.style.color="var(--heat)";msg.textContent=FF_T("Aucun backend joignable (normal en démo). Déploie l'API auth.js.");}
   };
+
+  if(forgotLink)forgotLink.onclick=()=>{ showPane(forgotBody); forgotMsg.textContent=""; forgotEmailI.value=emailI.value; setTimeout(()=>forgotEmailI.focus(),50); };
+  if(forgotBack)forgotBack.onclick=()=>showPane(mainBody);
+  if(forgotSubmit)forgotSubmit.onclick=async()=>{
+    const email=(forgotEmailI.value||"").trim();
+    if(!EMAIL_RE.test(email)){forgotMsg.style.color="var(--heat)";forgotMsg.textContent=FF_T("Adresse email invalide.");return;}
+    forgotMsg.style.color="var(--muted)";forgotMsg.textContent=FF_T("Veuillez patienter…");
+    try{
+      const r=await fetch(API+"/api/mot-de-passe-oublie",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({email})});
+      const d=await r.json();
+      forgotMsg.style.color="var(--good)";
+      forgotMsg.textContent=d.message?FF_T("Si un compte existe avec cet email, un lien de réinitialisation vient d'être envoyé."):FF_T("Demande envoyée.");
+    }catch(e){forgotMsg.style.color="var(--heat)";forgotMsg.textContent=FF_T("Aucun backend joignable (normal en démo). Déploie l'API mot-de-passe-oublie.js.");}
+  };
+  if(resetSubmit)resetSubmit.onclick=async()=>{
+    const pass=resetPassI.value||"";
+    if(pass.length<6){resetMsg.style.color="var(--heat)";resetMsg.textContent=FF_T("Mot de passe : 6 caractères minimum.");return;}
+    resetMsg.style.color="var(--muted)";resetMsg.textContent=FF_T("Veuillez patienter…");
+    try{
+      const r=await fetch(API+"/api/reinitialiser-mot-de-passe",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({token:resetToken,password:pass})});
+      const d=await r.json();
+      if(!r.ok){resetMsg.style.color="var(--heat)";resetMsg.textContent=d.error||FF_T("Lien invalide ou expiré.");return;}
+      resetMsg.style.color="var(--good)";resetMsg.textContent=FF_T("Mot de passe changé ! Tu peux te connecter.");
+      try{const u=new URL(location.href);u.searchParams.delete("reset");history.replaceState(null,"",u.toString());}catch(err){}
+      setTimeout(()=>open("login"),1200);
+    }catch(e){resetMsg.style.color="var(--heat)";resetMsg.textContent=FF_T("Aucun backend joignable (normal en démo). Déploie l'API reinitialiser-mot-de-passe.js.");}
+  };
+
+  // Liens reçus par email : ?reset=TOKEN (nouveau mot de passe) et ?verify=TOKEN (confirmation email)
+  try{
+    const p=new URLSearchParams(location.search);
+    const rTok=p.get("reset");
+    if(rTok){ resetToken=rTok; setMode("login"); showPane(resetBody); modal.classList.add("open"); modal.setAttribute("aria-hidden","false"); }
+    const vTok=p.get("verify");
+    if(vTok){
+      fetch(API+"/api/verifier-email",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({token:vTok})})
+        .then(r=>r.json().then(d=>({ok:r.ok,d})))
+        .then(({ok,d})=>{
+          alert(ok?FF_T("Email confirmé, merci !"):FF_T("Lien de confirmation invalide ou expiré."));
+          try{const u=new URL(location.href);u.searchParams.delete("verify");history.replaceState(null,"",u.toString());}catch(err){}
+        }).catch(()=>{});
+    }
+  }catch(e){}
+
   loadU();updateUI();
 })();
 
@@ -1701,6 +1768,15 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     "Adresse email invalide.":"Invalid email address.","Afficher le mot de passe":"Show password","Masquer le mot de passe":"Hide password",
     "Veuillez patienter…":"Please wait…","Échec de la connexion.":"Login failed.",
     "Aucun backend joignable (normal en démo). Déploie l'API auth.js.":"No backend reachable (expected in demo). Deploy the auth.js API.",
+    "Mot de passe oublié ?":"Forgot password?","Indique ton email, on t'envoie un lien pour choisir un nouveau mot de passe.":"Enter your email, we'll send you a link to choose a new password.",
+    "Envoyer le lien":"Send the link","← Retour à la connexion":"← Back to sign in","Choisis ton nouveau mot de passe.":"Choose your new password.",
+    "Nouveau mot de passe":"New password","Valider":"Confirm",
+    "Si un compte existe avec cet email, un lien de réinitialisation vient d'être envoyé.":"If an account exists with this email, a reset link was just sent.",
+    "Demande envoyée.":"Request sent.",
+    "Aucun backend joignable (normal en démo). Déploie l'API mot-de-passe-oublie.js.":"No backend reachable (expected in demo). Deploy the mot-de-passe-oublie.js API.",
+    "Lien invalide ou expiré.":"Invalid or expired link.","Mot de passe changé ! Tu peux te connecter.":"Password changed! You can now sign in.",
+    "Aucun backend joignable (normal en démo). Déploie l'API reinitialiser-mot-de-passe.js.":"No backend reachable (expected in demo). Deploy the reinitialiser-mot-de-passe.js API.",
+    "Email confirmé, merci !":"Email confirmed, thank you!","Lien de confirmation invalide ou expiré.":"Invalid or expired confirmation link.",
     "Connecte-toi pour t'abonner.":"Sign in to subscribe.","Impossible de démarrer le paiement.":"Couldn't start the payment.",
     "Paiement indisponible : déploie le backend Stripe (voir DEPLOIEMENT.md).":"Payment unavailable: deploy the Stripe backend (see DEPLOIEMENT.md).",
     "Crée ton compte gratuit pour commencer.":"Create your free account to get started.",
@@ -1755,7 +1831,8 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     +".step h3,.step p,.field>label,.res-toggle button,.cfg-act,.settings-box>.t,.buy-config>.t,.buy-row a,.disclaimer,"
     +"#shopSel option,.hud-label,.hud-stat .k,.out-mini .k,.strip-item .l,"
     +".foot-in>.small,.cookie p,.ck-ghost,.ck-ok,.auth-field label,.auth-note,#aiFab span,#aiTiers button,"
-    +".pprice small,.notify-card h2,.notify-card p,#ntBtn,.ved-fps span,.sp-eyebrow";
+    +".pprice small,.notify-card h2,.notify-card p,#ntBtn,.ved-fps span,.sp-eyebrow,"
+    +"#authForgotLink,#forgotBack,#forgotSubmit,.auth-forgot-intro,#resetSubmit";
   function setLang(lang){
     document.querySelectorAll(SEL).forEach(el=>{
       if(el.children.length) return;

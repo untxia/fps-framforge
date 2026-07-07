@@ -13,6 +13,7 @@ CREATE TYPE type_ddr          AS ENUM ('DDR4', 'DDR5');
 CREATE TYPE palier_ia         AS ENUM ('gratuit', 'pro', 'elite');
 CREATE TYPE role_message       AS ENUM ('utilisateur', 'assistant');
 CREATE TYPE source_benchmark  AS ENUM ('mesure_interne', 'soumission_utilisateur');
+CREATE TYPE type_jeton        AS ENUM ('reinitialisation_mdp', 'verification_email');
 
 -- =============================================================
 --  UTILISATEURS, OFFRES, ABONNEMENTS, PAIEMENTS
@@ -23,8 +24,26 @@ CREATE TABLE utilisateur (
     email              VARCHAR(255) NOT NULL UNIQUE,
     pseudo             VARCHAR(60)  NOT NULL,
     mot_de_passe_hash  VARCHAR(255) NOT NULL,
+    email_verifie      BOOLEAN      NOT NULL DEFAULT FALSE,
     date_inscription   TIMESTAMPTZ  NOT NULL DEFAULT now(),
     est_actif          BOOLEAN      NOT NULL DEFAULT TRUE
+);
+
+-- Jetons à usage unique : réinitialisation de mot de passe / vérification d'email
+CREATE TABLE jeton_action (
+    id_jeton       INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_utilisateur INTEGER    NOT NULL REFERENCES utilisateur(id_utilisateur) ON DELETE CASCADE,
+    type           type_jeton NOT NULL,
+    jeton_hash     VARCHAR(255) NOT NULL UNIQUE,
+    expire_le      TIMESTAMPTZ  NOT NULL,
+    utilise_le     TIMESTAMPTZ
+);
+
+-- Compteurs de limitation de débit (fenêtre glissante simple, par clé = route:ip:fenêtre)
+CREATE TABLE limite_appel (
+    cle       VARCHAR(160) PRIMARY KEY,
+    compteur  INTEGER     NOT NULL DEFAULT 1,
+    expire_le TIMESTAMPTZ NOT NULL
 );
 
 CREATE TABLE offre (
@@ -214,6 +233,9 @@ CREATE INDEX idx_benchmark_jeu          ON benchmark(id_jeu);
 CREATE INDEX idx_benchmark_gpu          ON benchmark(id_gpu);
 CREATE INDEX idx_message_conversation   ON message_ia(id_conversation);
 CREATE INDEX idx_prospect_email         ON prospect(email);
+CREATE INDEX idx_jeton_utilisateur      ON jeton_action(id_utilisateur);
+CREATE INDEX idx_jeton_expire           ON jeton_action(expire_le);
+CREATE INDEX idx_limite_expire          ON limite_appel(expire_le);
 
 -- =============================================================
 --  CONTRAINTE DE COHERENCE CATEGORIE <-> ROLE (déclencheur)
