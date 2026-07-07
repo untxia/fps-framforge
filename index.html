@@ -1705,15 +1705,20 @@ if(!reduced){
     busy=true; send.disabled=true;
     const typing=document.createElement("div");typing.className="ai-typing";typing.innerHTML="<i></i><i></i><i></i>";msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
     try{
-      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:sysPrompt(),messages:history})});
+      const g=GPUS[state.gpu].l,c=CPUS[state.cpu].l,r=RAMS[state.ram].l,game=GAMES[state.game].l,resL=state.res==2160?"4K":state.res+"p";
+      let est=""; try{const x=compute();est=" FPS estimés "+x.fps+", 1% low "+x.low+", limité par "+x.bottleneck+".";}catch(e){}
+      const ctx="GPU "+g+", CPU "+c+", RAM "+r+", jeu "+game+", "+resL+"."+est;
+      let token=""; try{token=localStorage.getItem("ff_token")||"";}catch(e){}
+      const headers={"content-type":"application/json"}; if(token)headers["authorization"]="Bearer "+token;
+      const res=await fetch((FF_CONFIG.apiBase||"")+"/api/assistant",{method:"POST",headers,
+        body:JSON.stringify({messages:history,tier:(tier==="free"?"gratuit":tier),ctx})});
       const data=await res.json(); typing.remove();
-      const text=((data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n")).trim();
+      const text=(data.reply||"").trim();
       if(text){bot(text);history.push({role:"assistant",content:text});}
-      else bot("Hmm, pas de réponse là. Reformule ta question ?");
+      else bot(data.error?("⚠️ "+data.error):"Hmm, pas de réponse là. Reformule ta question ?");
     }catch(e){
       typing.remove();
-      bot("⚠️ L'assistant IA a besoin de l'API. Elle fonctionne dans l'app Claude ; sur ton site déployé, il faudra la relier à ton propre backend (clé API). Je peux t'aider à le mettre en place.");
+      bot("⚠️ L'assistant a besoin de ton backend Grok en ligne. En démo local il ne répond pas ; une fois déployé sur Vercel avec ta clé XAI_API_KEY, il fonctionnera.");
     }
     busy=false; send.disabled=false; input.focus();
   }
