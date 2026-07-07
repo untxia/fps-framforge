@@ -74,6 +74,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "action inconnue (signup|login)" });
   } catch (e) {
     if (e.code === "23505") return res.status(409).json({ error: "Email déjà utilisé" });
-    return res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur auth:", e.message, e.code || "");
+    return res.status(500).json({ error: "Erreur serveur", detail: e.message, code: e.code });
   }
 }
