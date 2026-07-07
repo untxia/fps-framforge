@@ -13,7 +13,14 @@ import { query } from "./db.js";
 const ORDER = { gratuit: 0, pro: 1, elite: 2 };
 const NAME = ["gratuit", "pro", "elite"];
 
-function instructions(tier) {
+function instructions(tier, en) {
+  if (en) {
+    if (tier === "elite")
+      return " ELITE TIER: proactive expert. Give a personalized, step-by-step optimization plan tailored to the exact setup, anticipate bottlenecks, suggest a SAFE undervolt/curve, and a complete structured action plan.";
+    if (tier === "pro")
+      return " PRO TIER: detailed answers, all games, precise BIOS and RAM settings (XMP/EXPO, PBO, timings), before/after comparisons.";
+    return " FREE TIER: short, general answers (3-4 sentences). For detailed BIOS settings, custom profiles and advanced optimization, invite the user to upgrade to Pro (€4.99) or Elite (€9.99).";
+  }
   if (tier === "elite")
     return " NIVEAU ELITE : expert proactif. Plan d'optimisation personnalisé étape par étape adapté à la config exacte, anticipe les goulots, propose une courbe/undervolt SÛRE, plan d'action complet et structuré.";
   if (tier === "pro")
@@ -48,7 +55,7 @@ export default async function handler(req, res) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
-    const { messages, tier: demande, ctx } = body;
+    const { messages, tier: demande, ctx, lang } = body;
     if (!Array.isArray(messages)) return res.status(400).json({ error: "messages[] requis" });
 
     // Palier effectif = min(demandé, palier réel en base) -> impossible de tricher côté client
@@ -56,11 +63,16 @@ export default async function handler(req, res) {
     const token = h.startsWith("Bearer ") ? h.slice(7) : null;
     const dbTier = await tierServeur(token);
     const eff = NAME[Math.min(ORDER[demande] ?? 0, ORDER[dbTier])];
+    const en = lang === "en";
 
-    const systeme = "Tu es l'assistant IA de FRAMEFORGE, un outil d'optimisation des FPS pour le jeu compétitif sur PC. "
-      + (ctx ? ("Config de l'utilisateur : " + String(ctx).slice(0, 500) + ". ") : "")
-      + "Réponds en français, clair et actionnable, sans conseils dangereux (pas d'overvolt extrême). N'invente pas de chiffres de benchmark précis."
-      + instructions(eff);
+    const systeme = (en
+        ? "You are the AI assistant for FRAMEFORGE, an FPS optimization tool for competitive PC gaming. "
+        : "Tu es l'assistant IA de FRAMEFORGE, un outil d'optimisation des FPS pour le jeu compétitif sur PC. ")
+      + (ctx ? ((en ? "User's current setup: " : "Config de l'utilisateur : ") + String(ctx).slice(0, 500) + ". ") : "")
+      + (en
+        ? "Reply in English, clear and actionable, with no dangerous advice (no extreme overvolting). Don't invent precise benchmark numbers."
+        : "Réponds en français, clair et actionnable, sans conseils dangereux (pas d'overvolt extrême). N'invente pas de chiffres de benchmark précis.")
+      + instructions(eff, en);
 
     // Format OpenAI-compatible (Groq) : le system prompt est un message "system"
     const msgs = [{ role: "system", content: systeme }].concat(

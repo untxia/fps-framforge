@@ -61,12 +61,12 @@
   <div class="sp-glow sp-b"></div>
   <div class="sp-cube"><div class="cube"><div class="f f1"></div><div class="f f2"></div><div class="f f3"></div><div class="f f4"></div><div class="f f5"></div><div class="f f6"></div></div></div>
   <div class="sp-inner">
-    <span class="sp-eyebrow">// système d'optimisation FPS · esport</span>
+    <span class="sp-eyebrow i18n">// système d'optimisation FPS · esport</span>
     <h1 class="sp-title">FRAMEFORGE</h1>
-    <p class="sp-tag">Transforme ta config en <span style="color:var(--signal)">frames</span>.</p>
+    <p class="sp-tag i18n-html">Transforme ta config en <span style="color:var(--signal)">frames</span>.</p>
     <div class="sp-boot"><span id="spBoot">initialisation…</span> <b id="spFps">0</b> fps</div>
-    <button id="spEnter" class="sp-enter" type="button">DÉFILE POUR ENTRER <span class="sp-chev">⌄</span></button>
-    <div class="sp-sub">Configurateur gratuit · Assistant IA · <span id="spCompo">70+</span> composants</div>
+    <button id="spEnter" class="sp-enter" type="button"><span class="i18n">DÉFILE POUR ENTRER</span> <span class="sp-chev">⌄</span></button>
+    <div class="sp-sub"><span class="i18n">Configurateur gratuit · Assistant IA ·</span> <span id="spCompo">70+</span> <span class="i18n">composants</span></div>
   </div>
 </div>
 
@@ -107,7 +107,7 @@
       <a href="#tarifs">Tarifs</a>
     </div>
     <a href="#configurateur" class="nav-cta">// Tester ma config</a>
-    <button id="langBtn" class="nav-auth" type="button" aria-label="Language">EN</button>
+    <button id="langBtn" class="nav-auth" type="button" aria-label="Language"><span id="langFlag" aria-hidden="true">🇬🇧</span> EN</button>
     <button id="authBtn" class="nav-auth" type="button">Connexion</button>
     <button class="nav-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
@@ -132,14 +132,14 @@
   <div class="wrap hero-grid">
     <div class="hero-left" data-parallax="0.04">
       <span class="eyebrow">Optimisation hardware · esport</span>
-      <h1>Transforme ta config en <span class="accent">frames</span>.<br>Pas en <span class="heat">regrets</span>.</h1>
+      <h1 class="i18n-html">Transforme ta config en <span class="accent">frames</span>.<br>Pas en <span class="heat">regrets</span>.</h1>
       <p class="lead">FRAMEFORGE analyse ton GPU, ton CPU, ta carte mère et ta RAM, puis te livre les réglages exacts pour grimper en FPS sur tes jeux compétitifs. Et tu restes libre de tout régler à ta main.</p>
       <div class="hero-cta">
         <a href="#configurateur" class="btn btn-primary">Calculer mes FPS →</a>
         <a href="#tarifs" class="btn btn-ghost">Voir les tarifs</a>
       </div>
       <div class="hero-tags">
-        <span><span id="tagCompo">70+</span> composants référencés</span>
+        <span><span id="tagCompo">70+</span> <span class="i18n">composants référencés</span></span>
         <span>12 jeux · GTA 6 bientôt</span>
         <span>Réglages BIOS &amp; in-game</span>
       </div>
@@ -153,7 +153,7 @@
         </div>
         <div class="hud-status">
           <div id="heroGame">CS2 · 1080p</div>
-          <div>limité par <b id="heroBottle">CPU</b></div>
+          <div><span class="i18n">limité par</span> <b id="heroBottle">CPU</b></div>
         </div>
       </div>
       <canvas id="tele"></canvas>
@@ -420,7 +420,7 @@
           </div>
 
           <div class="settings-box">
-            <div class="t">Réglages recommandés · <span id="setGame">—</span></div>
+            <div class="t"><span class="i18n">Réglages recommandés ·</span> <span id="setGame">—</span></div>
             <ul id="setList"></ul>
           </div>
 
@@ -460,7 +460,7 @@
         <h2>Tout est référencé. Un clic pour voir ou acheter.</h2>
       </div>
       <div class="shop-pick">
-        Boutique :
+        <span class="i18n">Boutique :</span>
         <select id="shopSel">
           <option value="amazon">Amazon.fr</option>
           <option value="gshop">Google Shopping</option>
@@ -470,10 +470,10 @@
     </div>
 
     <div class="ref-cols reveal">
-      <div class="ref-col"><h3>Cartes graphiques <small id="cGpu"></small></h3><div id="refGpu"></div></div>
-      <div class="ref-col"><h3>Processeurs <small id="cCpu"></small></h3><div id="refCpu"></div></div>
-      <div class="ref-col"><h3>Mémoire vive <small id="cRam"></small></h3><div id="refRam"></div></div>
-      <div class="ref-col"><h3>Cartes mères <small id="cMobo"></small></h3><div id="refMobo"></div></div>
+      <div class="ref-col"><h3><span class="i18n">Cartes graphiques</span> <small id="cGpu"></small></h3><div id="refGpu"></div></div>
+      <div class="ref-col"><h3><span class="i18n">Processeurs</span> <small id="cCpu"></small></h3><div id="refCpu"></div></div>
+      <div class="ref-col"><h3><span class="i18n">Mémoire vive</span> <small id="cRam"></small></h3><div id="refRam"></div></div>
+      <div class="ref-col"><h3><span class="i18n">Cartes mères</span> <small id="cMobo"></small></h3><div id="refMobo"></div></div>
     </div>
   </div>
 </section>
@@ -504,7 +504,7 @@
   <div class="wrap">
     <div class="section-head" data-fx="rise" style="margin-left:auto;margin-right:auto;text-align:center">
       <span class="eyebrow" style="justify-content:center">Tarifs</span>
-      <h2>Gratuit pour commencer.<br>Pas cher pour aller plus loin.</h2>
+      <h2 class="i18n-html">Gratuit pour commencer.<br>Pas cher pour aller plus loin.</h2>
       <p>Le configurateur de base est gratuit, à vie. Tu passes au payant seulement quand tu veux débloquer les jeux et les réglages avancés.</p>
     </div>
     <div class="price-grid reveal">
@@ -532,8 +532,8 @@
           <li>Tous les jeux compétitifs</li>
           <li>Réglages BIOS &amp; RAM détaillés</li>
           <li>Profils illimités sauvegardés</li>
-          <li>Comparaison avant / après <em class="soon">bientôt</em></li>
-          <li>Export overlay &amp; checklist <em class="soon">bientôt</em></li>
+          <li><span class="i18n">Comparaison avant / après</span> <em class="soon">bientôt</em></li>
+          <li><span class="i18n">Export overlay &amp; checklist</span> <em class="soon">bientôt</em></li>
           <li>Assistant IA avancé (BIOS &amp; RAM)</li>
         </ul>
         <a href="#" id="btnPro" class="btn btn-primary">Passer en Pro</a>
@@ -547,7 +547,7 @@
           <li>Assistant IA expert (plan personnalisé)</li>
           <li>Nouveaux composants en avant-première</li>
           <li>Support prioritaire</li>
-          <li>Analyse de logs &amp; télémétrie <em class="soon">bientôt</em></li>
+          <li><span class="i18n">Analyse de logs &amp; télémétrie</span> <em class="soon">bientôt</em></li>
           <li>Conseils stabilité / températures</li>
         </ul>
         <a href="#" id="btnElite" class="btn btn-ghost">Choisir Elite</a>
@@ -579,11 +579,11 @@
   <div class="wrap">
     <div class="section-head" data-fx="rise"><span class="eyebrow">FAQ</span><h2>Les questions fréquentes.</h2></div>
     <div class="faq reveal" id="faqList">
-      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Comment calculez-vous les FPS ?</button><div class="faq-a"><div>Les FPS affichés sont des <b>estimations</b>. On combine un score de performance relatif pour ton GPU et ton CPU, un profil par jeu (plus ou moins gourmand, plutôt limité GPU ou CPU), la résolution et le preset graphique, puis on identifie le composant qui te bride. Les FPS réels dépendent de la scène, des pilotes, du refroidissement et de la stabilité. Le modèle est affiné en continu avec de vraies données de benchmark.</div></div></div>
-      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Ça marche avec ma configuration exacte ?</button><div class="faq-a"><div>Oui : tu choisis ton GPU, ton CPU, ta carte mère et ta RAM dans le configurateur. Des dizaines de références sont déjà gérées, et la liste s'agrandit. Si un composant manque, dis-le-nous.</div></div></div>
-      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Les réglages BIOS, c'est risqué ?</button><div class="faq-a"><div>On ne propose que des réglages sûrs et réversibles (XMP/EXPO, Resizable BAR, profils PBO modérés). On évite tout overvolt extrême. Tu gardes le contrôle total et chaque étape est expliquée.</div></div></div>
-      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">C'est vraiment gratuit ?</button><div class="faq-a"><div>Oui. Le configurateur, les réglages recommandés et l'assistant de base sont gratuits à vie. Les offres Pro (4,99€) et Elite (9,99€) débloquent les réglages avancés et un assistant plus poussé. Sans engagement.</div></div></div>
-      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Mes données sont-elles revendues ?</button><div class="faq-a"><div>Non. Aucune publicité, aucune revente de données. On utilise au plus une mesure d'audience anonyme, soumise à ton consentement.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Comment calculez-vous les FPS ?</button><div class="faq-a"><div class="i18n-html">Les FPS affichés sont des <b>estimations</b>. On combine un score de performance relatif pour ton GPU et ton CPU, un profil par jeu (plus ou moins gourmand, plutôt limité GPU ou CPU), la résolution et le preset graphique, puis on identifie le composant qui te bride. Les FPS réels dépendent de la scène, des pilotes, du refroidissement et de la stabilité. Le modèle est affiné en continu avec de vraies données de benchmark.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Ça marche avec ma configuration exacte ?</button><div class="faq-a"><div class="i18n-html">Oui : tu choisis ton GPU, ton CPU, ta carte mère et ta RAM dans le configurateur. Des dizaines de références sont déjà gérées, et la liste s'agrandit. Si un composant manque, dis-le-nous.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Les réglages BIOS, c'est risqué ?</button><div class="faq-a"><div class="i18n-html">On ne propose que des réglages sûrs et réversibles (XMP/EXPO, Resizable BAR, profils PBO modérés). On évite tout overvolt extrême. Tu gardes le contrôle total et chaque étape est expliquée.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">C'est vraiment gratuit ?</button><div class="faq-a"><div class="i18n-html">Oui. Le configurateur, les réglages recommandés et l'assistant de base sont gratuits à vie. Les offres Pro (4,99€) et Elite (9,99€) débloquent les réglages avancés et un assistant plus poussé. Sans engagement.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false">Mes données sont-elles revendues ?</button><div class="faq-a"><div class="i18n-html">Non. Aucune publicité, aucune revente de données. On utilise au plus une mesure d'audience anonyme, soumise à ton consentement.</div></div></div>
     </div>
   </div>
 </section>
@@ -667,7 +667,7 @@
 </button>
 <div class="ai-panel" id="aiPanel" role="dialog" aria-label="Assistant IA FRAMEFORGE" aria-hidden="true">
   <div class="ai-head">
-    <div class="ai-title"><span class="ai-dot"></span>Assistant FRAMEFORGE</div>
+    <div class="ai-title"><span class="ai-dot"></span><span class="i18n">Assistant FRAMEFORGE</span></div>
     <button class="ai-close" id="aiClose" aria-label="Fermer">&#10005;</button>
   </div>
   <div class="ai-tiers" id="aiTiers">
@@ -693,6 +693,8 @@ const FF_CONFIG={
   plausibleDomain:""       // ex. "frameforge.fr"
 };
 let FF_USER=null; // utilisateur connecté (rempli par le module comptes)
+// Traduction FR/EN : window.FF_DICT est rempli plus bas par le module BILINGUE.
+function FF_T(s){ return (document.documentElement.lang==="en" && window.FF_DICT && window.FF_DICT[s]!==undefined) ? window.FF_DICT[s] : s; }
 // Corrige automatiquement le domaine (canonical / og:url) une fois en ligne
 (function(){try{const o=location.origin;if(o&&o!=="null"&&o.indexOf("localhost")<0){
   const c=document.querySelector('link[rel=canonical]');if(c)c.href=o+"/";
@@ -779,7 +781,9 @@ const selGpu=document.getElementById("selGpu"),selCpu=document.getElementById("s
       selRam=document.getElementById("selRam"),selGame=document.getElementById("selGame");
 fillSelect(selGpu,GPUS);fillSelect(selCpu,CPUS);
 selRam.innerHTML=RAMS.map((r,i)=>'<option value="'+i+'">'+r.l+'</option>').join("");
-selGame.innerHTML=GAMES.map((g,i)=>'<option value="'+i+'"'+(g.soon?' disabled':'')+'>'+g.l+(g.soon?' — bientôt':'')+'</option>').join("");
+function fillGameSelect(){const v=selGame.value;selGame.innerHTML=GAMES.map((g,i)=>'<option value="'+i+'"'+(g.soon?' disabled':'')+'>'+g.l+(g.soon?' — '+FF_T('bientôt'):'')+'</option>').join("");if(v!=="")selGame.value=v;}
+window.FF_fillGameSelect=fillGameSelect;
+fillGameSelect();
 selGpu.value=0;selCpu.value=1;selRam.value=0;selGame.value=0;
 
 /* ====================== CATALOGUE RÉFÉRENCE ====================== */
@@ -788,17 +792,17 @@ function perfBar(w){return '<span class="perf"><i style="width:'+Math.max(6,Math
 function refRow(it,w){
   return '<a class="ref-row" data-q="'+it.l+'" target="_blank" rel="noopener" href="'+buyUrl(it.l)+'">'
     +'<span class="rn"><span class="nm">'+chip(it.g)+it.l+'</span>'+perfBar(w)+'</span>'
-    +'<span class="rl">Voir →</span></a>';
+    +'<span class="rl">'+FF_T("Voir →")+'</span></a>';
 }
 function buildCatalog(){
   document.getElementById("refGpu").innerHTML=GPUS.map(it=>refRow(it,it.s)).join("");
   document.getElementById("refCpu").innerHTML=CPUS.map(it=>refRow(it,Math.min(100,it.s))).join("");
   document.getElementById("refRam").innerHTML=RAMS.map(it=>refRow(it,(it.s-0.75)/0.28*100)).join("");
   const rm=document.getElementById("refMobo"); if(rm)rm.innerHTML=MOBOS.map(it=>refRow(it,80+(it.m-0.97)*600)).join("");
-  document.getElementById("cGpu").textContent=GPUS.length+" réf.";
-  document.getElementById("cCpu").textContent=CPUS.length+" réf.";
-  document.getElementById("cRam").textContent=RAMS.length+" réf.";
-  const cm=document.getElementById("cMobo"); if(cm)cm.textContent=MOBOS.length+" réf.";
+  document.getElementById("cGpu").textContent=GPUS.length+FF_T(" réf.");
+  document.getElementById("cCpu").textContent=CPUS.length+FF_T(" réf.");
+  document.getElementById("cRam").textContent=RAMS.length+FF_T(" réf.");
+  const cm=document.getElementById("cMobo"); if(cm)cm.textContent=MOBOS.length+FF_T(" réf.");
 }
 buildCatalog();
 /* ====================== STATS VERIDIQUES (calculées depuis le catalogue) ====================== */
@@ -811,7 +815,7 @@ buildCatalog();
 
 /* ====================== CALCUL ====================== */
 function presetFactor(p){return 1.45-(p/100)*0.74;}
-function presetName(p){let n="Compétitif";PRESET_NAMES.forEach(pn=>{if(p>=pn[0])n=pn[1];});return n;}
+function presetName(p){let n="Compétitif";PRESET_NAMES.forEach(pn=>{if(p>=pn[0])n=pn[1];});return FF_T(n);}
 function compute(){
   const gpu=GPUS[state.gpu],cpu=CPUS[state.cpu],ram=RAMS[state.ram],game=GAMES[state.game],mobo=MOBOS[state.mobo]||{m:1};
   const resF=RES[state.res],qF=presetFactor(state.preset);
@@ -841,10 +845,10 @@ function render(){
   document.getElementById("outFt").textContent=r.ft+" ms";
   document.getElementById("outSub").textContent=r.game.l+" · "+(state.res==2160?"4K":state.res+"p")+" · preset "+presetName(state.preset);
   const bn=document.getElementById("outBottle");
-  bn.textContent="Goulot d'étranglement : "+r.bottleneck;
+  bn.textContent=FF_T("Goulot d'étranglement : ")+r.bottleneck;
   bn.className="bottleneck "+(r.bottleneck==="GPU"?"gpu":"cpu");
   document.getElementById("setGame").textContent=r.game.l;
-  document.getElementById("setList").innerHTML=r.game.set.map(s=>'<li><span>'+s[0]+'</span><span>'+s[1]+'</span></li>').join("");
+  document.getElementById("setList").innerHTML=r.game.set.map(s=>'<li><span>'+FF_T(s[0])+'</span><span>'+FF_T(s[1])+'</span></li>').join("");
   setBuy("buyGpu","buyGpuA",GPUS[state.gpu].l);
   setBuy("buyCpu","buyCpuA",CPUS[state.cpu].l);
   setBuy("buyRam","buyRamA",RAMS[state.ram].l);
@@ -906,20 +910,20 @@ function shareURL(){
   return base+"?"+qs+"#configurateur";
 }
 function copyText(t){
-  function fb(){try{const a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();document.execCommand("copy");document.body.removeChild(a);toast("Lien copié ! Partage-le.");}catch(e){toast("Copie ce lien : "+t);}}
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>toast("Lien copié ! Partage-le.")).catch(fb);}else fb();
+  function fb(){try{const a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();document.execCommand("copy");document.body.removeChild(a);toast(FF_T("Lien copié ! Partage-le."));}catch(e){toast(FF_T("Copie ce lien : ")+t);}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>toast(FF_T("Lien copié ! Partage-le."))).catch(fb);}else fb();
 }
 function getProfiles(){try{return JSON.parse(localStorage.getItem("ff_profiles")||"[]");}catch(e){return [];}}
-function setProfiles(a){try{localStorage.setItem("ff_profiles",JSON.stringify(a));}catch(e){toast("Sauvegarde indisponible dans l'aperçu — OK une fois en ligne.");}}
-function refreshProf(){if(!profSel)return;const a=getProfiles();profSel.innerHTML='<option value="">Mes profils ('+a.length+')…</option>'+a.map((p,i)=>'<option value="'+i+'">'+p.name+'</option>').join("");}
+function setProfiles(a){try{localStorage.setItem("ff_profiles",JSON.stringify(a));}catch(e){toast(FF_T("Sauvegarde indisponible dans l'aperçu — OK une fois en ligne."));}}
+function refreshProf(){if(!profSel)return;const a=getProfiles();profSel.innerHTML='<option value="">'+FF_T("Mes profils (")+a.length+FF_T(")…")+'</option>'+a.map((p,i)=>'<option value="'+i+'">'+p.name+'</option>').join("");}
 
 if(selMobo){fillSelect(selMobo,MOBOS);selMobo.value=0;selMobo.onchange=e=>{state.mobo=+e.target.value;render();};}
 const shareBtn=document.getElementById("shareBtn"); if(shareBtn)shareBtn.onclick=()=>copyText(shareURL());
 const saveBtn=document.getElementById("saveBtn");
-if(saveBtn)saveBtn.onclick=()=>{ if(!FF_USER){toast("Connecte-toi pour sauvegarder tes profils (fonction Pro).");if(window.FF_openAuth)window.FF_openAuth("login");return;} const a=getProfiles();a.push({name:GPUS[state.gpu].l+" · "+GAMES[state.game].l,s:Object.assign({},state)});setProfiles(a);refreshProf();toast("Profil sauvegardé ("+getProfiles().length+").");};
-if(profSel)profSel.onchange=e=>{if(e.target.value==="")return;const a=getProfiles(),i=+e.target.value;if(a[i]){Object.assign(state,a[i].s);syncSelects();render();toast("Profil chargé.");}};
+if(saveBtn)saveBtn.onclick=()=>{ if(!FF_USER){toast(FF_T("Connecte-toi pour sauvegarder tes profils (fonction Pro)."));if(window.FF_openAuth)window.FF_openAuth("login");return;} const a=getProfiles();a.push({name:GPUS[state.gpu].l+" · "+GAMES[state.game].l,s:Object.assign({},state)});setProfiles(a);refreshProf();toast(FF_T("Profil sauvegardé (")+getProfiles().length+FF_T(")."));};
+if(profSel)profSel.onchange=e=>{if(e.target.value==="")return;const a=getProfiles(),i=+e.target.value;if(a[i]){Object.assign(state,a[i].s);syncSelects();render();toast(FF_T("Profil chargé."));}};
 const delProf=document.getElementById("delProf");
-if(delProf)delProf.onclick=()=>{if(profSel.value==="")return;const a=getProfiles();a.splice(+profSel.value,1);setProfiles(a);refreshProf();toast("Profil supprimé.");};
+if(delProf)delProf.onclick=()=>{if(profSel.value==="")return;const a=getProfiles();a.splice(+profSel.value,1);setProfiles(a);refreshProf();toast(FF_T("Profil supprimé."));};
 
 restoreFromURL();syncSelects();refreshProf();render();
 
@@ -928,16 +932,16 @@ function detecterGPU(){
   try{
     const cv=document.createElement("canvas");
     const gl=cv.getContext("webgl")||cv.getContext("experimental-webgl");
-    if(!gl){toast("WebGL indisponible dans ce navigateur.");return;}
+    if(!gl){toast(FF_T("WebGL indisponible dans ce navigateur."));return;}
     const dbg=gl.getExtension("WEBGL_debug_renderer_info");
     const r=dbg?gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL):"";
-    if(!r){toast("Le navigateur masque le modele du GPU (vie privee).");return;}
+    if(!r){toast(FF_T("Le navigateur masque le modele du GPU (vie privee)."));return;}
     let best=-1,bestLen=0;
     const R=r.toUpperCase().replace(/\s+/g," ");
     GPUS.forEach((g,i)=>{const lbl=g.l.toUpperCase();if(R.indexOf(lbl)>=0 && lbl.length>bestLen){best=i;bestLen=lbl.length;}});
-    if(best>=0){state.gpu=best;syncSelects();render();toast("GPU detecte : "+GPUS[best].l);}
-    else toast("Detecte : "+r.slice(0,46)+"... (absent de la liste)");
-  }catch(e){toast("Detection impossible sur ce navigateur.");}
+    if(best>=0){state.gpu=best;syncSelects();render();toast(FF_T("GPU detecte : ")+GPUS[best].l);}
+    else toast(FF_T("Detecte : ")+r.slice(0,46)+FF_T("... (absent de la liste)"));
+  }catch(e){toast(FF_T("Detection impossible sur ce navigateur."));}
 }
 const detectBtn=document.getElementById("detectBtn"); if(detectBtn)detectBtn.onclick=detecterGPU;
 
@@ -964,10 +968,10 @@ function carteDeScore(){
   g.fillText("GPU  "+GPUS[state.gpu].l,64,460);
   g.fillText("CPU  "+CPUS[state.cpu].l,64,500);
   g.fillText("RAM  "+RAMS[state.ram].l,64,540);
-  g.fillStyle="#ff7a2f";g.fillText("1% low "+r.low+" fps   -   limite par "+r.bottleneck,64,586);
-  g.font="500 22px monospace";g.fillStyle="#5d6a80";g.fillText("estimation FRAMEFORGE",w-340,586);
-  try{const a=document.createElement("a");a.download="frameforge-score.png";a.href=cv.toDataURL("image/png");document.body.appendChild(a);a.click();a.remove();toast("Carte de score telechargee !");}
-  catch(e){toast("Generation impossible ici.");}
+  g.fillStyle="#ff7a2f";g.fillText("1% low "+r.low+" fps   -   "+FF_T("limite par ")+r.bottleneck,64,586);
+  g.font="500 22px monospace";g.fillStyle="#5d6a80";g.fillText(FF_T("estimation FRAMEFORGE"),w-340,586);
+  try{const a=document.createElement("a");a.download="frameforge-score.png";a.href=cv.toDataURL("image/png");document.body.appendChild(a);a.click();a.remove();toast(FF_T("Carte de score telechargee !"));}
+  catch(e){toast(FF_T("Generation impossible ici."));}
 }
 const cardBtn=document.getElementById("cardBtn"); if(cardBtn)cardBtn.onclick=carteDeScore;
 
@@ -1105,17 +1109,18 @@ if(!reduced){
               elite:["Fais-moi un plan complet","Optimise ma config exacte","Undervolt sûr pour mon GPU ?"]};
   function bubble(t,cls){const d=document.createElement("div");d.className="ai-msg "+cls;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
   function bot(t){bubble(t,"bot");}
-  function renderSugg(){sugg.innerHTML="";SUGG[tier].forEach(s=>{const b=document.createElement("button");b.textContent=s;b.onclick=()=>{input.value=s;submit();};sugg.appendChild(b);});}
-  function greet(){bot("Salut 👋 Je suis l'assistant FRAMEFORGE. Je t'aide à régler ta config et tes jeux pour gagner des FPS. Pose ta question ou choisis une suggestion ci-dessous.");renderSugg();}
+  function renderSugg(){sugg.innerHTML="";SUGG[tier].forEach(s=>{const b=document.createElement("button");b.textContent=FF_T(s);b.onclick=()=>{input.value=b.textContent;submit();};sugg.appendChild(b);});}
+  window.FF_aiRefresh=()=>{tierNote.textContent=FF_T(NOTES[tier]);renderSugg();};
+  function greet(){bot(FF_T("Salut 👋 Je suis l'assistant FRAMEFORGE. Je t'aide à régler ta config et tes jeux pour gagner des FPS. Pose ta question ou choisis une suggestion ci-dessous."));renderSugg();}
   function openPanel(o){panel.classList.toggle("open",o);panel.setAttribute("aria-hidden",!o);fab.classList.toggle("hide",o);if(o&&!history.length)greet();if(o)setTimeout(()=>input.focus(),220);}
   fab.onclick=()=>openPanel(true); closeB.onclick=()=>openPanel(false);
   tiersEl.addEventListener("click",e=>{
     const b=e.target.closest("button"); if(!b)return;
     [].forEach.call(tiersEl.children,x=>x.classList.remove("on")); b.classList.add("on");
-    tier=b.dataset.tier; tierNote.textContent=NOTES[tier]; renderSugg();
-    bot(tier==="free"?"Tu es sur l'assistant gratuit : je donne l'essentiel. Pour les réglages BIOS pointus et un plan perso, Pro (4,99€) et Elite (9,99€) débloquent un assistant plus poussé."
+    tier=b.dataset.tier; tierNote.textContent=FF_T(NOTES[tier]); renderSugg();
+    bot(FF_T(tier==="free"?"Tu es sur l'assistant gratuit : je donne l'essentiel. Pour les réglages BIOS pointus et un plan perso, Pro (4,99€) et Elite (9,99€) débloquent un assistant plus poussé."
        :tier==="pro"?"Mode Pro activé : réglages détaillés (BIOS, RAM, timings) et tous les jeux."
-       :"Mode Elite activé : je deviens ton expert perso. Dis-moi ce que tu veux optimiser et je te fais un plan complet.");
+       :"Mode Elite activé : je deviens ton expert perso. Dis-moi ce que tu veux optimiser et je te fais un plan complet."));
   });
   function sysPrompt(){
     const g=GPUS[state.gpu].l,c=CPUS[state.cpu].l,r=RAMS[state.ram].l,game=GAMES[state.game].l,res=state.res==2160?"4K":state.res+"p";
@@ -1138,14 +1143,14 @@ if(!reduced){
       let token=""; try{token=localStorage.getItem("ff_token")||"";}catch(e){}
       const headers={"content-type":"application/json"}; if(token)headers["authorization"]="Bearer "+token;
       const res=await fetch((FF_CONFIG.apiBase||"")+"/api/assistant",{method:"POST",headers,
-        body:JSON.stringify({messages:history,tier:(tier==="free"?"gratuit":tier),ctx})});
+        body:JSON.stringify({messages:history,tier:(tier==="free"?"gratuit":tier),ctx,lang:document.documentElement.lang})});
       const data=await res.json(); typing.remove();
       const text=(data.reply||"").trim();
       if(text){bot(text);history.push({role:"assistant",content:text});}
-      else bot(data.error?("⚠️ "+data.error):"Hmm, pas de réponse là. Reformule ta question ?");
+      else bot(data.error?("⚠️ "+data.error):FF_T("Hmm, pas de réponse là. Reformule ta question ?"));
     }catch(e){
       typing.remove();
-      bot("⚠️ L'assistant a besoin de ton backend en ligne. En démo local il ne répond pas ; une fois déployé sur Vercel avec ta clé GROQ_API_KEY, il fonctionnera.");
+      bot(FF_T("⚠️ L'assistant a besoin de ton backend en ligne. En démo local il ne répond pas ; une fois déployé sur Vercel avec ta clé GROQ_API_KEY, il fonctionnera."));
     }
     busy=false; send.disabled=false; input.focus();
   }
@@ -1164,12 +1169,23 @@ if(!reduced){
   if(no)no.onclick=()=>setConsent("refused");
 
   const LEGAL={
-    mentions:["Mentions légales","<p><span class='todo'>[À compléter]</span> Éditeur du site : <b>[Nom / société]</b>, [adresse], [email de contact]. Directeur de la publication : [nom].</p><h4>Hébergement</h4><p>Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — vercel.com. <span class='todo'>(à confirmer selon ton hébergeur réel)</span></p><h4>Propriété intellectuelle</h4><p>L'ensemble des contenus de FRAMEFORGE (textes, visuels, code) est protégé. Toute reproduction sans autorisation est interdite.</p><h4>Contact</h4><p>Pour toute question : [email].</p>"],
-    confidentialite:["Politique de confidentialité","<p>FRAMEFORGE respecte ta vie privée et le RGPD.</p><h4>Données collectées</h4><p>Mesure d'audience anonyme (si tu acceptes les cookies) et, le cas échéant, ton email si tu t'inscris à une notification. Aucune revente de données, aucune publicité.</p><h4>Finalités</h4><p>Améliorer le site et te tenir informé des nouveautés que tu demandes.</p><h4>Tes droits</h4><p>Accès, rectification, suppression, opposition : écris à <span class='todo'>[email RGPD]</span>.</p><h4>Cookies</h4><p>Uniquement des cookies de mesure d'audience anonymes, soumis à ton consentement.</p>"],
-    cgv:["Conditions générales de vente","<p><span class='todo'>[À compléter / faire valider]</span></p><h4>Offres</h4><p>Gratuit (0€), Pro (4,99€/mois ou 39€/an), Elite (9,99€/mois). Abonnement sans engagement, résiliable à tout moment.</p><h4>Paiement</h4><p>Paiement sécurisé via [Stripe]. Facturation mensuelle ou annuelle reconductible.</p><h4>Droit de rétractation</h4><p>Conformément à la loi, délai de rétractation de 14 jours pour les consommateurs, sauf renoncement exprès au démarrage du service.</p><h4>Résiliation</h4><p>Depuis ton compte, à tout moment ; l'accès reste actif jusqu'à la fin de la période payée.</p><h4>Contact</h4><p>[email support].</p>"]
+    mentions:{
+      fr:["Mentions légales","<p><span class='todo'>[À compléter]</span> Éditeur du site : <b>[Nom / société]</b>, [adresse], [email de contact]. Directeur de la publication : [nom].</p><h4>Hébergement</h4><p>Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — vercel.com. <span class='todo'>(à confirmer selon ton hébergeur réel)</span></p><h4>Propriété intellectuelle</h4><p>L'ensemble des contenus de FRAMEFORGE (textes, visuels, code) est protégé. Toute reproduction sans autorisation est interdite.</p><h4>Contact</h4><p>Pour toute question : [email].</p>"],
+      en:["Legal notice","<p><span class='todo'>[To be completed]</span> Site publisher: <b>[Name / company]</b>, [address], [contact email]. Publication director: [name].</p><h4>Hosting</h4><p>Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, United States — vercel.com. <span class='todo'>(confirm with your actual host)</span></p><h4>Intellectual property</h4><p>All FRAMEFORGE content (text, visuals, code) is protected. Any reproduction without authorization is prohibited.</p><h4>Contact</h4><p>For any question: [email].</p>"]
+    },
+    confidentialite:{
+      fr:["Politique de confidentialité","<p>FRAMEFORGE respecte ta vie privée et le RGPD.</p><h4>Données collectées</h4><p>Mesure d'audience anonyme (si tu acceptes les cookies) et, le cas échéant, ton email si tu t'inscris à une notification. Aucune revente de données, aucune publicité.</p><h4>Finalités</h4><p>Améliorer le site et te tenir informé des nouveautés que tu demandes.</p><h4>Tes droits</h4><p>Accès, rectification, suppression, opposition : écris à <span class='todo'>[email RGPD]</span>.</p><h4>Cookies</h4><p>Uniquement des cookies de mesure d'audience anonymes, soumis à ton consentement.</p>"],
+      en:["Privacy Policy","<p>FRAMEFORGE respects your privacy and GDPR.</p><h4>Data collected</h4><p>Anonymous audience measurement (if you accept cookies) and, where applicable, your email if you sign up for a notification. No data resale, no advertising.</p><h4>Purposes</h4><p>Improving the site and keeping you informed about the updates you asked for.</p><h4>Your rights</h4><p>Access, rectification, deletion, objection: write to <span class='todo'>[GDPR email]</span>.</p><h4>Cookies</h4><p>Only anonymous audience-measurement cookies, subject to your consent.</p>"]
+    },
+    cgv:{
+      fr:["Conditions générales de vente","<p><span class='todo'>[À compléter / faire valider]</span></p><h4>Offres</h4><p>Gratuit (0€), Pro (4,99€/mois ou 39€/an), Elite (9,99€/mois). Abonnement sans engagement, résiliable à tout moment.</p><h4>Paiement</h4><p>Paiement sécurisé via [Stripe]. Facturation mensuelle ou annuelle reconductible.</p><h4>Droit de rétractation</h4><p>Conformément à la loi, délai de rétractation de 14 jours pour les consommateurs, sauf renoncement exprès au démarrage du service.</p><h4>Résiliation</h4><p>Depuis ton compte, à tout moment ; l'accès reste actif jusqu'à la fin de la période payée.</p><h4>Contact</h4><p>[email support].</p>"],
+      en:["Terms and Conditions of Sale","<p><span class='todo'>[To be completed / validated]</span></p><h4>Plans</h4><p>Free (€0), Pro (€4.99/mo or €39/yr), Elite (€9.99/mo). No-commitment subscription, cancel anytime.</p><h4>Payment</h4><p>Secure payment via [Stripe]. Monthly or annual recurring billing.</p><h4>Right of withdrawal</h4><p>As required by law, a 14-day withdrawal period applies to consumers, unless the customer expressly waives it when starting the service.</p><h4>Cancellation</h4><p>From your account, at any time; access stays active until the end of the paid period.</p><h4>Contact</h4><p>[support email].</p>"]
+    }
   };
   const modal=document.getElementById("modal"),mTitle=document.getElementById("modalTitle"),mBody=document.getElementById("modalBody");
-  function openModal(key){const d=LEGAL[key]; if(!d)return; mTitle.textContent=d[0]; mBody.innerHTML=d[1]; modal.classList.add("open"); modal.setAttribute("aria-hidden","false");}
+  let lastModalKey=null;
+  function openModal(key){const g=LEGAL[key]; if(!g)return; lastModalKey=key; const d=g[document.documentElement.lang==="en"?"en":"fr"]; mTitle.textContent=d[0]; mBody.innerHTML=d[1]; modal.classList.add("open"); modal.setAttribute("aria-hidden","false");}
+  window.FF_legalRefresh=()=>{ if(lastModalKey && modal.classList.contains("open")) openModal(lastModalKey); };
   function closeModal(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}
   document.querySelectorAll("[data-modal]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();openModal(a.dataset.modal);}));
   document.querySelectorAll("[data-close]").forEach(x=>x.addEventListener("click",closeModal));
@@ -1187,14 +1203,14 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   if(!b)return;
   b.onclick=()=>{
     const v=(e.value||"").trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){m.style.color="var(--heat)";m.textContent="Entre un email valide.";return;}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){m.style.color="var(--heat)";m.textContent=FF_T("Entre un email valide.");return;}
     if(NEWSLETTER_ENDPOINT){
       fetch(NEWSLETTER_ENDPOINT,{method:"POST",headers:{"content-type":"application/json","accept":"application/json"},body:JSON.stringify({email:v})})
-        .then(()=>{m.style.color="var(--good)";m.textContent="C'est noté, on te préviendra !";e.value="";})
-        .catch(()=>{m.style.color="var(--heat)";m.textContent="Erreur d'envoi, réessaie plus tard.";});
+        .then(()=>{m.style.color="var(--good)";m.textContent=FF_T("C'est noté, on te préviendra !");e.value="";})
+        .catch(()=>{m.style.color="var(--heat)";m.textContent=FF_T("Erreur d'envoi, réessaie plus tard.");});
     }else{
       try{const a=JSON.parse(localStorage.getItem("ff_emails")||"[]");a.push(v);localStorage.setItem("ff_emails",JSON.stringify(a));}catch(err){}
-      m.style.color="var(--good)";m.textContent="C'est noté ! (Démo — renseigne NEWSLETTER_ENDPOINT pour collecter en vrai.)";e.value="";
+      m.style.color="var(--good)";m.textContent=FF_T("C'est noté ! (Démo — renseigne NEWSLETTER_ENDPOINT pour collecter en vrai.)");e.value="";
     }
   };
 })();
@@ -1323,9 +1339,11 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     document.head.appendChild(s);
   })();
   const fpsEl=document.getElementById("spFps"), bootEl=document.getElementById("spBoot");
+  let bootDone=!reduced?false:true;
+  window.FF_bootRefresh=()=>{ if(bootEl)bootEl.textContent=FF_T(bootDone?"système prêt ·":"initialisation…"); };
   if(!reduced && fpsEl){
-    let v=0; const t=setInterval(()=>{ v+=Math.floor(Math.random()*38+22); if(v>=486){v=486;clearInterval(t);if(bootEl)bootEl.textContent="système prêt ·";} fpsEl.textContent=v; },70);
-  } else if(fpsEl){ fpsEl.textContent="486"; if(bootEl)bootEl.textContent="système prêt ·"; }
+    let v=0; const t=setInterval(()=>{ v+=Math.floor(Math.random()*38+22); if(v>=486){v=486;clearInterval(t);bootDone=true;if(bootEl)bootEl.textContent=FF_T("système prêt ·");} fpsEl.textContent=v; },70);
+  } else if(fpsEl){ fpsEl.textContent="486"; if(bootEl)bootEl.textContent=FF_T("système prêt ·"); }
   function finish(){
     if(sp.__done)return; sp.__done=true;
     try{sessionStorage.setItem("ff_splash2","1");}catch(e){}
@@ -1380,15 +1398,15 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   if(!b)return;
   b.onclick=async()=>{
     const v=parseInt(i.value);
-    if(!v||v<1||v>2000){m.style.color="var(--heat)";m.textContent="Entre un FPS valide (1 à 2000).";return;}
+    if(!v||v<1||v>2000){m.style.color="var(--heat)";m.textContent=FF_T("Entre un FPS valide (1 à 2000).");return;}
     const payload={jeu:GAMES[state.game].l,gpu:GPUS[state.gpu].l,cpu:CPUS[state.cpu].l,resolution:state.res,preset:state.preset,fps_moyen:v};
     try{
       const r=await fetch((FF_CONFIG.apiBase||"")+"/api/benchmark",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
       if(!r.ok)throw 0;
-      m.style.color="var(--good)";m.textContent="Merci ! Ta mesure aide toute la communauté.";i.value="";
+      m.style.color="var(--good)";m.textContent=FF_T("Merci ! Ta mesure aide toute la communauté.");i.value="";
     }catch(e){
       try{const a=JSON.parse(localStorage.getItem("ff_bench")||"[]");a.push(payload);localStorage.setItem("ff_bench",JSON.stringify(a));}catch(_){}
-      m.style.color="var(--good)";m.textContent="Mesure enregistrée localement (démo — backend requis pour l’envoi).";i.value="";
+      m.style.color="var(--good)";m.textContent=FF_T("Mesure enregistrée localement (démo — backend requis pour l’envoi).");i.value="";
     }
   };
 })();
@@ -1419,10 +1437,11 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   function logout(){try{localStorage.removeItem("ff_token");localStorage.removeItem("ff_user");}catch(e){}FF_USER=null;updateUI();}
   function tierOf(u){return (u&&u.tier)?u.tier:"gratuit";}
   function updateUI(){
-    btn.innerHTML=FF_USER?(FF_USER.pseudo+' <span class="tier">'+tierOf(FF_USER)+'</span>'):"Connexion";
-    if(btnM)btnM.textContent=FF_USER?("Déconnexion ("+FF_USER.pseudo+")"):"Connexion";
+    btn.innerHTML=FF_USER?(FF_USER.pseudo+' <span class="tier">'+tierOf(FF_USER)+'</span>'):FF_T("Connexion");
+    if(btnM)btnM.textContent=FF_USER?(FF_T("Déconnexion (")+FF_USER.pseudo+")"):FF_T("Connexion");
   }
-  function setMode(m){mode=m;const login=m==="login";title.textContent=login?"Connexion":"Inscription";submit.textContent=login?"Se connecter":"Créer mon compte";pseudoField.style.display=login?"none":"block";tabL.classList.toggle("on",login);tabS.classList.toggle("on",!login);}
+  window.FF_authRefresh=updateUI;
+  function setMode(m){mode=m;const login=m==="login";title.textContent=login?FF_T("Connexion"):FF_T("Inscription");submit.textContent=login?FF_T("Se connecter"):FF_T("Créer mon compte");pseudoField.style.display=login?"none":"block";tabL.classList.toggle("on",login);tabS.classList.toggle("on",!login);}
   function open(m,text){setMode(m||"login");msg.style.color="var(--muted)";msg.textContent=text||"";modal.classList.add("open");modal.setAttribute("aria-hidden","false");setTimeout(()=>emailI.focus(),150);}
   function close(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}
   window.FF_openAuth=open;
@@ -1433,16 +1452,16 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   document.addEventListener("keydown",e=>{if(e.key==="Escape")close();});
   submit.onclick=async()=>{
     const email=(emailI.value||"").trim(), pass=passI.value||"", pseudo=(pseudoI.value||"").trim();
-    if(!email||!pass){msg.style.color="var(--heat)";msg.textContent="Email et mot de passe requis.";return;}
-    if(mode==="signup" && pass.length<6){msg.style.color="var(--heat)";msg.textContent="Mot de passe : 6 caractères minimum.";return;}
-    msg.style.color="var(--muted)";msg.textContent="Veuillez patienter…";
+    if(!email||!pass){msg.style.color="var(--heat)";msg.textContent=FF_T("Email et mot de passe requis.");return;}
+    if(mode==="signup" && pass.length<6){msg.style.color="var(--heat)";msg.textContent=FF_T("Mot de passe : 6 caractères minimum.");return;}
+    msg.style.color="var(--muted)";msg.textContent=FF_T("Veuillez patienter…");
     try{
       const r=await fetch(API+"/api/auth",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:mode,email,password:pass,pseudo})});
       const d=await r.json();
-      if(!r.ok){msg.style.color="var(--heat)";msg.textContent=d.error||"Échec de la connexion.";return;}
+      if(!r.ok){msg.style.color="var(--heat)";msg.textContent=d.error||FF_T("Échec de la connexion.");return;}
       saveU(d.token,d.user||{pseudo:pseudo||email.split("@")[0],tier:"gratuit"});
       updateUI();close();
-    }catch(e){msg.style.color="var(--heat)";msg.textContent="Aucun backend joignable (normal en démo). Déploie l'API auth.js.";}
+    }catch(e){msg.style.color="var(--heat)";msg.textContent=FF_T("Aucun backend joignable (normal en démo). Déploie l'API auth.js.");}
   };
   loadU();updateUI();
 })();
@@ -1451,18 +1470,18 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
 (function(){
   const API=FF_CONFIG.apiBase||"";
   async function checkout(plan){
-    if(!FF_USER){ if(window.FF_openAuth)window.FF_openAuth("login","Connecte-toi pour t'abonner.");return; }
+    if(!FF_USER){ if(window.FF_openAuth)window.FF_openAuth("login",FF_T("Connecte-toi pour t'abonner."));return; }
     try{
       const r=await fetch(API+"/api/checkout",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({plan})});
       const d=await r.json();
-      if(d.url)location.href=d.url; else alert(d.error||"Impossible de démarrer le paiement.");
-    }catch(e){alert("Paiement indisponible : déploie le backend Stripe (voir DEPLOIEMENT.md).");}
+      if(d.url)location.href=d.url; else alert(d.error||FF_T("Impossible de démarrer le paiement."));
+    }catch(e){alert(FF_T("Paiement indisponible : déploie le backend Stripe (voir DEPLOIEMENT.md)."));}
   }
   const pro=document.getElementById("btnPro"); if(pro)pro.onclick=(e)=>{e.preventDefault();checkout("pro");};
   const el=document.getElementById("btnElite"); if(el)el.onclick=(e)=>{e.preventDefault();checkout("elite");};
-  const free=document.getElementById("btnFree"); if(free)free.onclick=(e)=>{ if(!FF_USER){e.preventDefault();if(window.FF_openAuth)window.FF_openAuth("signup","Crée ton compte gratuit pour commencer.");} };
+  const free=document.getElementById("btnFree"); if(free)free.onclick=(e)=>{ if(!FF_USER){e.preventDefault();if(window.FF_openAuth)window.FF_openAuth("signup",FF_T("Crée ton compte gratuit pour commencer."));} };
   // message de retour après paiement Stripe
-  try{const p=new URLSearchParams(location.search);if(p.get("paiement")==="succes")setTimeout(()=>alert("Paiement réussi ! Ton abonnement est actif."),400);}catch(e){}
+  try{const p=new URLSearchParams(location.search);if(p.get("paiement")==="succes")setTimeout(()=>alert(FF_T("Paiement réussi ! Ton abonnement est actif.")),400);}catch(e){}
 })();
 
 /* ====================== SCROLL INERTIEL (style constructeur premium) ====================== */
@@ -1515,14 +1534,14 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     cur=k; const b=BUILDS[k], t=idxOf(b), save=Object.assign({},state);
     Object.assign(state,t); const r=compute(); Object.assign(state,save);
     const cls=r.fps>=240?["A","esport"]:r.fps>=144?["B","haute fluidité"]:r.fps>=90?["C","fluide"]:["D","jouable"];
-    el("vedClass").textContent=cls[0]; el("vedClassLbl").textContent=cls[1];
-    el("vedName").textContent=b.name; el("vedSub").textContent=b.sub;
-    el("vedFps").textContent=r.fps; el("vedLow").textContent="1% low ≈ "+r.low+" fps · limité par le "+r.bottleneck;
+    el("vedClass").textContent=cls[0]; el("vedClassLbl").textContent=FF_T(cls[1]);
+    el("vedName").textContent=FF_T(b.name); el("vedSub").textContent=FF_T(b.sub);
+    el("vedFps").textContent=r.fps; el("vedLow").textContent="1% low ≈ "+r.low+" fps · "+FF_T("limité par le ")+r.bottleneck;
     el("vedSpecs").innerHTML=
-      "<li><b>Carte graphique</b><span>"+b.gpu+"</span></li>"+
-      "<li><b>Processeur</b><span>"+b.cpu+"</span></li>"+
-      "<li><b>Mémoire</b><span>"+b.ram+"</span></li>"+
-      "<li><b>Jeu de référence</b><span>"+b.game+"</span></li>";
+      "<li><b>"+FF_T("Carte graphique")+"</b><span>"+b.gpu+"</span></li>"+
+      "<li><b>"+FF_T("Processeur")+"</b><span>"+b.cpu+"</span></li>"+
+      "<li><b>"+FF_T("Mémoire")+"</b><span>"+b.ram+"</span></li>"+
+      "<li><b>"+FF_T("Jeu de référence")+"</b><span>"+b.game+"</span></li>";
   }
   function load(){
     Object.assign(state,idxOf(BUILDS[cur]));
@@ -1536,12 +1555,12 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   }));
   el("vedGo").addEventListener("click",load);
   el("vedShow").addEventListener("click",load);
+  window.FF_renderVed=()=>renderVed(cur);
   renderVed(0);
 })();
 
 /* ====================== BILINGUE FR / EN ====================== */
 (function(){
-  const H1_EN='Turn your rig into <span class="accent">frames</span>.<br>Not <span class="heat">regrets</span>.';
   const DICT={
     // nav
     "Optimisation":"Optimization","Configurateur":"Configurator","Composants":"Components","Méthode":"Method","Tarifs":"Pricing",
@@ -1552,8 +1571,17 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     "Calculer mes FPS →":"Calculate my FPS →","Voir les tarifs":"See pricing",
     "12 jeux · GTA 6 bientôt":"12 games · GTA 6 soon","Réglages BIOS & in-game":"BIOS & in-game settings",
     "composants référencés":"components listed",
+    "FPS estimé · moyenne":"Estimated FPS · average","limité par":"limited by",
+    "jeux compétitifs":"competitive games","leviers matériels optimisés":"hardware levers optimized","réglages modifiables":"settings adjustable",
     // eyebrows + titres de section
     "Ce qu'on optimise":"What we optimize","Chaque composant compte. On les règle tous.":"Every component counts. We tune them all.",
+    "Quatre leviers matériels, une seule cible : des frames stables quand la partie se joue à la milliseconde.":"Four hardware levers, one target: stable frames when the game is won on the millisecond.",
+    "Aperçu des réglages et des composants que FRAMEFORGE référence et optimise.":"A look at the settings and components FRAMEFORGE lists and optimizes.",
+    "Choisis tes composants et ton jeu : on estime tes FPS, on identifie ton goulot d'étranglement, et on te donne les réglages recommandés. Ensuite, le preset reste entre tes mains.":"Pick your components and your game: we estimate your FPS, identify your bottleneck, and give you the recommended settings. The preset still stays in your hands.",
+    "// système d'optimisation FPS · esport":"// FPS optimization system · esports",
+    "Transforme ta config en <span style=\"color:var(--signal)\">frames</span>.":"Turn your rig into <span style=\"color:var(--signal)\">frames</span>.",
+    "DÉFILE POUR ENTRER":"SCROLL TO ENTER","Configurateur gratuit · Assistant IA ·":"Free configurator · AI assistant ·","composants":"components",
+    "initialisation…":"initializing…","système prêt ·":"system ready ·",
     "Le matériel":"The hardware","Du BIOS au silicium.":"From BIOS to silicon.",
     "Configurations vedettes":"Featured builds","Le configurateur":"The configurator","Renseigne ta machine. Règle à ta main.":"Enter your machine. Tune it your way.",
     "Référence composants":"Component reference","Tout est référencé. Un clic pour voir ou acheter.":"Everything is listed. One click to view or buy.",
@@ -1561,23 +1589,145 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     "Ils ont gagné des FPS":"They gained FPS","La communauté en parle.":"The community talks about it.",
     "Les questions fréquentes.":"Frequently asked questions.",
     "Nouveautés":"What's new","GTA 6, Battlefield… sois prévenu en premier.":"GTA 6, Battlefield… be the first to know.",
+    "Laisse ton email : on te prévient dès qu'un nouveau jeu ou de nouveaux composants arrivent. Zéro spam.":"Leave your email: we'll notify you as soon as a new game or new components arrive. Zero spam.",
+    "Me prévenir":"Notify me",
+    // features
+    "Carte graphique":"Graphics card","Processeur":"Processor","Carte mère & BIOS":"Motherboard & BIOS","Mémoire vive":"Memory",
+    "01 / GPU":"01 / GPU","02 / CPU":"02 / CPU","03 / CARTE MÈRE":"03 / MOTHERBOARD","04 / RAM":"04 / RAM",
+    "Courbe fréquence/voltage, power limit, mode performance pilote et upscaling. On vise le sweet spot watt/FPS.":"Frequency/voltage curve, power limit, driver performance mode and upscaling. We aim for the watt/FPS sweet spot.",
+    "Le nerf de l'esport. PBO, Curve Optimizer ou undervolt, affinité cœurs et plan d'alimentation Windows.":"The nerve center of esports. PBO, Curve Optimizer or undervolting, core affinity and Windows power plans.",
+    "Resizable BAR, profils XMP/EXPO, états C, microcode à jour : les réglages que personne ne touche.":"Resizable BAR, XMP/EXPO profiles, C-states, up-to-date microcode: the settings nobody touches.",
+    "Fréquence, timings et latence. La RAM mal réglée plombe les 1% low — là où l'esport se gagne.":"Frequency, timings and latency. Badly tuned RAM kills your 1% lows — where esports is won.",
+    // matériel
+    "// Profil BIOS « ESPORT » — XMP/EXPO, ReBAR, courbe ventilateurs":"// BIOS profile « ESPORT » — XMP/EXPO, ReBAR, fan curve",
+    "Barrettes DDR installées — fréquence & timings":"Installed DDR sticks — frequency & timings",
+    "GPU RTX / Radeon — power limit & courbe V/F":"GPU RTX / Radeon — power limit & V/F curve",
+    "CPU Ryzen / Core — PBO, undervolt, affinité":"CPU Ryzen / Core — PBO, undervolt, affinity",
+    "Ton rig, réglé au composant près.":"Your rig, tuned down to the component.",
+    "// GPU · CPU · carte mère · RAM — chaque pièce optimisée pour le FPS":"// GPU · CPU · motherboard · RAM — every part optimized for FPS",
+    "Cartes graphiques référencées":"Graphics cards listed",
+    "Triple ventilateur · RGB":"Triple fan · RGB","Édition blanche":"White edition","RTX installée en boîtier":"RTX installed in a case",
     // vedettes
     "Trois builds.":"Three builds.","Des configurations de référence, prêtes à charger dans le configurateur.":"Reference builds, ready to load into the configurator.",
     "Esport · 1080p":"Esports · 1080p","Performance · 1440p":"Performance · 1440p","Ultra · 4K":"Ultra · 4K",
     "Configurer cette build →":"Configure this build →","Voir le détail →":"See details →",
+    "esport":"esports","haute fluidité":"high smoothness","fluide":"smooth","jouable":"playable","limité par le ":"limited by the ",
+    "Mémoire":"Memory","Jeu de référence":"Reference game","FPS estimés":"Estimated FPS",
+    "Cartes graphiques":"Graphics cards","Processeurs":"Processors","Cartes mères":"Motherboards",
+    "Le sprinter esport":"The esports sprinter","1080p · latence minimale":"1080p · minimal latency",
+    "L'équilibre parfait":"The perfect balance","1440p · fluidité & netteté":"1440p · smoothness & sharpness",
+    "La vitrine ultime":"The ultimate showcase","4K · qualité maximale":"4K · maximum quality",
+    // configurateur
+    "Carte mère":"Motherboard","Jeu compétitif":"Competitive game","Résolution":"Resolution",
+    "Preset graphique — règle comme tu veux":"Graphics preset — tune it your way",
+    "Détecter mon GPU":"Detect my GPU","Carte de score":"Score card","Partager le lien":"Share the link","Sauvegarder le profil":"Save the profile",
+    "Suppr.":"Del.","Supprimer le profil sélectionné":"Delete the selected profile","Mes profils…":"My profiles…","Mes profils":"My profiles",
+    "Menu":"Menu","Navigation principale":"Main navigation","Ton email":"Your email","Consentement aux cookies":"Cookie consent",
+    "Réglages recommandés ·":"Recommended settings ·","Acheter cette config":"Buy this build",
+    "Tes FPS réels — aide à calibrer le modèle":"Your real FPS — helps calibrate the model",
+    "FPS moyens mesurés en jeu":"Average FPS measured in-game","Envoyer":"Send",
+    "Estimations indicatives (modèle de performance relatif : composant, jeu, résolution, preset). Les FPS réels dépendent de la scène, des pilotes, du refroidissement et de la stabilité système. Liens d'achat = recherche boutique du composant. Le catalogue s'enrichit en continu.":"Indicative estimates (relative performance model: component, game, resolution, preset). Real FPS depends on the scene, drivers, cooling and system stability. Purchase links = store search for the component. The catalog keeps growing.",
+    "Boutique :":"Store:","Recherche Google":"Google Search",
+    "FPS moyens estimés":"Estimated average FPS","Goulot d'étranglement : ":"Bottleneck: ","Voir →":"View →"," réf.":" listed",
+    "1% low":"1% low","Frametime":"Frametime","Preset":"Preset",
+    // méthode
+    "Décris ta machine":"Describe your machine","Reçois ton preset":"Get your preset","Ajuste et compare":"Tune and compare",
+    "GPU, CPU, carte mère, RAM, écran. En 30 secondes, FRAMEFORGE connaît ton rig au composant près.":"GPU, CPU, motherboard, RAM, screen. In 30 seconds, FRAMEFORGE knows your rig down to the component.",
+    "Réglages BIOS et in-game classés par impact FPS, avec ton goulot d'étranglement clairement identifié.":"BIOS and in-game settings ranked by FPS impact, with your bottleneck clearly identified.",
+    "Tu modifies chaque curseur, tu sauvegardes tes profils et tu mesures le gain avant/après. Toujours sous ton contrôle.":"You tweak every slider, save your profiles and measure the before/after gain. Always under your control.",
     // tarifs
     "Gratuit":"Free","Recommandé":"Recommended","Commencer gratuitement":"Start for free","Passer en Pro":"Go Pro","Choisir Elite":"Choose Elite",
-    "bientôt":"soon",
+    "bientôt":"soon","pour toujours":"forever","ou 39€/an — soit 2 mois offerts":"or €39/yr — 2 months free","pour les compétiteurs":"for competitors","/ mois":"/ mo",
+    "Le configurateur de base est gratuit, à vie. Tu passes au payant seulement quand tu veux débloquer les jeux et les réglages avancés.":"The base configurator is free, forever. You go paid only when you want to unlock more games and advanced settings.",
+    "Configurateur FPS de base":"Base FPS configurator","1 jeu au choix":"1 game of your choice","Réglages in-game recommandés":"Recommended in-game settings",
+    "Détection du goulot d'étranglement":"Bottleneck detection","Assistant IA (conseils de base)":"AI assistant (basic advice)",
+    "Réglages BIOS détaillés":"Detailed BIOS settings","Profils sauvegardés":"Saved profiles",
+    "Tous les jeux compétitifs":"All competitive games","Réglages BIOS & RAM détaillés":"Detailed BIOS & RAM settings",
+    "Profils illimités sauvegardés":"Unlimited saved profiles","Comparaison avant / après":"Before / after comparison",
+    "Export overlay & checklist":"Overlay export & checklist","Assistant IA avancé (BIOS & RAM)":"Advanced AI assistant (BIOS & RAM)",
+    "Tout le plan Pro":"Everything in Pro","Assistant IA expert (plan personnalisé)":"Expert AI assistant (personalized plan)",
+    "Nouveaux composants en avant-première":"New components in early access","Support prioritaire":"Priority support",
+    "Analyse de logs & télémétrie":"Log & telemetry analysis","Conseils stabilité / températures":"Stability / temperature advice",
     // FAQ
     "Comment calculez-vous les FPS ?":"How do you calculate FPS?",
     "Ça marche avec ma configuration exacte ?":"Does it work with my exact setup?",
     "Les réglages BIOS, c'est risqué ?":"Are BIOS settings risky?",
     "C'est vraiment gratuit ?":"Is it really free?",
     "Mes données sont-elles revendues ?":"Is my data sold?",
+    "Les FPS affichés sont des <b>estimations</b>. On combine un score de performance relatif pour ton GPU et ton CPU, un profil par jeu (plus ou moins gourmand, plutôt limité GPU ou CPU), la résolution et le preset graphique, puis on identifie le composant qui te bride. Les FPS réels dépendent de la scène, des pilotes, du refroidissement et de la stabilité. Le modèle est affiné en continu avec de vraies données de benchmark.":"The FPS shown are <b>estimates</b>. We combine a relative performance score for your GPU and CPU, a per-game profile (more or less demanding, rather GPU- or CPU-bound), the resolution and graphics preset, then identify the component holding you back. Real FPS depends on the scene, drivers, cooling and system stability. The model is continuously refined with real benchmark data.",
+    "Oui : tu choisis ton GPU, ton CPU, ta carte mère et ta RAM dans le configurateur. Des dizaines de références sont déjà gérées, et la liste s'agrandit. Si un composant manque, dis-le-nous.":"Yes: you pick your GPU, CPU, motherboard and RAM in the configurator. Dozens of components are already supported, and the list keeps growing. If a component is missing, let us know.",
+    "On ne propose que des réglages sûrs et réversibles (XMP/EXPO, Resizable BAR, profils PBO modérés). On évite tout overvolt extrême. Tu gardes le contrôle total et chaque étape est expliquée.":"We only suggest safe, reversible settings (XMP/EXPO, Resizable BAR, moderate PBO profiles). We avoid any extreme overvolting. You stay in full control and every step is explained.",
+    "Oui. Le configurateur, les réglages recommandés et l'assistant de base sont gratuits à vie. Les offres Pro (4,99€) et Elite (9,99€) débloquent les réglages avancés et un assistant plus poussé. Sans engagement.":"Yes. The configurator, the recommended settings and the basic assistant are free for life. The Pro (€4.99) and Elite (€9.99) plans unlock advanced settings and a more capable assistant. No commitment.",
+    "Non. Aucune publicité, aucune revente de données. On utilise au plus une mesure d'audience anonyme, soumise à ton consentement.":"No. No advertising, no data resale. At most we use anonymous audience measurement, subject to your consent.",
     // footer
-    "Tous les réglages":"All settings","Guides BIOS":"BIOS guides","Mentions légales":"Legal notice","Confidentialité":"Privacy","CGV":"Terms"
+    "Tous les réglages":"All settings","Guides BIOS":"BIOS guides","Mentions légales":"Legal notice","Confidentialité":"Privacy","CGV":"Terms",
+    "Politique de confidentialité":"Privacy Policy","Conditions générales de vente":"Terms and Conditions of Sale",
+    "© 2026 · forgé pour l'esport":"© 2026 · forged for esports",
+    // cookies
+    "On utilise des cookies de mesure d'audience anonymes pour améliorer le site. Aucune publicité, aucune revente de données.":"We use anonymous audience-measurement cookies to improve the site. No advertising, no data resale.",
+    "Refuser":"Decline","Accepter":"Accept",
+    // comptes
+    "Pseudo":"Username","Email":"Email","Mot de passe":"Password","Inscription":"Sign up",
+    "Se connecter":"Log in","Créer mon compte":"Create my account","Déconnexion (":"Log out (",
+    "Tes identifiants sont envoyés à ton API (auth.js). Sans backend déployé, la connexion ne fonctionnera pas — c'est normal en démo.":"Your credentials are sent to your API (auth.js). Without a deployed backend, login won't work — that's expected in demo mode.",
+    "Email et mot de passe requis.":"Email and password required.","Mot de passe : 6 caractères minimum.":"Password: 6 characters minimum.",
+    "Veuillez patienter…":"Please wait…","Échec de la connexion.":"Login failed.",
+    "Aucun backend joignable (normal en démo). Déploie l'API auth.js.":"No backend reachable (expected in demo). Deploy the auth.js API.",
+    "Connecte-toi pour t'abonner.":"Sign in to subscribe.","Impossible de démarrer le paiement.":"Couldn't start the payment.",
+    "Paiement indisponible : déploie le backend Stripe (voir DEPLOIEMENT.md).":"Payment unavailable: deploy the Stripe backend (see DEPLOIEMENT.md).",
+    "Crée ton compte gratuit pour commencer.":"Create your free account to get started.",
+    "Paiement réussi ! Ton abonnement est actif.":"Payment successful! Your subscription is active.",
+    // assistant IA
+    "Ouvrir l'assistant IA":"Open the AI assistant","Assistant IA":"AI Assistant","Assistant FRAMEFORGE":"FRAMEFORGE Assistant",
+    "Assistant IA FRAMEFORGE":"FRAMEFORGE AI Assistant","Fermer":"Close",
+    "Gratuit · 0€":"Free · €0","Pro · 4,99€":"Pro · €4.99","Elite · 9,99€":"Elite · €9.99",
+    "Assistant de base — conseils essentiels. Passe en Pro/Elite pour aller plus loin.":"Basic assistant — essential advice. Upgrade to Pro/Elite to go further.",
+    "Assistant avancé — réglages BIOS & RAM détaillés, tous les jeux.":"Advanced assistant — detailed BIOS & RAM settings, all games.",
+    "Assistant expert — plan d'optimisation personnalisé, étape par étape.":"Expert assistant — personalized, step-by-step optimization plan.",
+    "Par quoi je commence ?":"Where do I start?","Réglages pour mon jeu ?":"Settings for my game?","Quel composant me limite ?":"Which component is my bottleneck?",
+    "Activer le XMP / EXPO ?":"Enable XMP / EXPO?","Comparer avant / après":"Compare before / after",
+    "Fais-moi un plan complet":"Give me a full plan","Optimise ma config exacte":"Optimize my exact setup","Undervolt sûr pour mon GPU ?":"Safe undervolt for my GPU?",
+    "Salut 👋 Je suis l'assistant FRAMEFORGE. Je t'aide à régler ta config et tes jeux pour gagner des FPS. Pose ta question ou choisis une suggestion ci-dessous.":"Hey 👋 I'm the FRAMEFORGE assistant. I help you tune your setup and games to gain FPS. Ask your question or pick a suggestion below.",
+    "Tu es sur l'assistant gratuit : je donne l'essentiel. Pour les réglages BIOS pointus et un plan perso, Pro (4,99€) et Elite (9,99€) débloquent un assistant plus poussé.":"You're on the free assistant: I give you the essentials. For advanced BIOS settings and a personal plan, Pro (€4.99) and Elite (€9.99) unlock a more capable assistant.",
+    "Mode Pro activé : réglages détaillés (BIOS, RAM, timings) et tous les jeux.":"Pro mode enabled: detailed settings (BIOS, RAM, timings) and all games.",
+    "Mode Elite activé : je deviens ton expert perso. Dis-moi ce que tu veux optimiser et je te fais un plan complet.":"Elite mode enabled: I become your personal expert. Tell me what you want to optimize and I'll build a full plan.",
+    "Hmm, pas de réponse là. Reformule ta question ?":"Hmm, no reply there. Try rephrasing your question?",
+    "⚠️ L'assistant a besoin de ton backend en ligne. En démo local il ne répond pas ; une fois déployé sur Vercel avec ta clé GROQ_API_KEY, il fonctionnera.":"⚠️ The assistant needs your backend to be live. It won't respond in local demo; once deployed on Vercel with your GROQ_API_KEY, it will work.",
+    "Pose ta question…":"Ask your question…",
+    // FPS réels (calibrage)
+    "Entre un FPS valide (1 à 2000).":"Enter a valid FPS (1 to 2000).",
+    "Merci ! Ta mesure aide toute la communauté.":"Thanks! Your measurement helps the whole community.",
+    "Mesure enregistrée localement (démo — backend requis pour l’envoi).":"Measurement saved locally (demo — backend required to submit).",
+    // toasts configurateur
+    "Lien copié ! Partage-le.":"Link copied! Share it.","Copie ce lien : ":"Copy this link: ",
+    "Sauvegarde indisponible dans l'aperçu — OK une fois en ligne.":"Saving unavailable in preview — OK once live.",
+    "Connecte-toi pour sauvegarder tes profils (fonction Pro).":"Sign in to save your profiles (Pro feature).",
+    "Profil sauvegardé (":"Profile saved (","Profil chargé.":"Profile loaded.","Profil supprimé.":"Profile deleted.",
+    "WebGL indisponible dans ce navigateur.":"WebGL unavailable in this browser.",
+    "Le navigateur masque le modele du GPU (vie privee).":"Your browser hides the GPU model (privacy).",
+    "GPU detecte : ":"GPU detected: ","Detecte : ":"Detected: ","... (absent de la liste)":"... (not in the list)",
+    "Detection impossible sur ce navigateur.":"Detection not possible in this browser.",
+    "Carte de score telechargee !":"Score card downloaded!","Generation impossible ici.":"Generation not possible here.",
+    "limite par ":"limited by ","estimation FRAMEFORGE":"FRAMEFORGE estimate",
+    "Mes profils (":"My profiles (",
+    "Entre un email valide.":"Enter a valid email.","C'est noté, on te préviendra !":"Got it, we'll let you know!",
+    "Erreur d'envoi, réessaie plus tard.":"Send error, try again later.",
+    "C'est noté ! (Démo — renseigne NEWSLETTER_ENDPOINT pour collecter en vrai.)":"Got it! (Demo — set NEWSLETTER_ENDPOINT to actually collect emails.)",
+    // presets
+    "Compétitif":"Competitive","Équilibré":"Balanced","Qualité":"Quality","Ultra":"Ultra",
+    // réglages de jeu (labels + valeurs)
+    "+fps_max":"+fps_max","fps_max":"fps_max","Ambient Occlusion":"Ambient Occlusion","Anti-aliasing":"Anti-aliasing","Anticrénelage":"Anti-aliasing","Anticrénelage MSAA":"MSAA anti-aliasing","Attendre Vsync":"Wait for Vsync","Cartes d'ombres":"Shadow maps","Disponibilité":"Availability","Distance d'affichage":"View distance","Détails":"Details","Détails / Textures":"Details / Textures","Détails du monde":"World details","Effets / Particules":"Effects / Particles","Effets / Post-process":"Effects / Post-process","Flou de mouvement":"Motion blur","Frame Gen":"Frame Gen","Frame Generation":"Frame Generation","Future Frame Rendering":"Future Frame Rendering","Limite FPS":"FPS limit","MSAA":"MSAA","Maillage / Terrain":"Mesh / Terrain","Mise à l'échelle rendu":"Render scaling","Mode multicœur":"Multicore mode","Mode performance":"Performance mode","NVIDIA Reflex":"NVIDIA Reflex","NVIDIA Reflex / Anti-Lag":"NVIDIA Reflex / Anti-Lag","Ombres":"Shadows","Plafond FPS":"FPS cap","Préréglage global":"Global preset","Qualité de rendu":"Render quality","Qualité environnement":"Environment quality","Qualité graphique":"Graphics quality","Qualité matériel":"Hardware quality","Qualité ombres":"Shadow quality","Ray tracing":"Ray tracing","Reflex":"Reflex","Réflexions SSR":"SSR reflections","Réticule effet":"Crosshair effect","Texture":"Texture","Texture Streaming":"Texture Streaming","Upscaling":"Upscaling","VSync":"VSync","Vignette / Bloom":"Vignette / Bloom","Vol. lumineux":"Volumetric lighting","Végétation":"Vegetation","0 (illimité)":"0 (unlimited)","100%":"100%","23 octobre 2026":"October 23, 2026","240":"240","2x":"2x","Activé":"On","Activé si dispo":"On if available","Activé+Boost":"On+Boost","Custom 360":"Custom 360","DLSS/FSR Qualité":"DLSS/FSR Quality","Désactivé":"Off","Faible":"Low","Faible→Moyenne":"Low→Medium","Haute performance":"High performance","Illimitée":"Unlimited","Illimitée / 250":"Unlimited / 250","MSAA 2x":"MSAA 2x","Performance":"Performance","Prochainement":"Coming soon","Sans limite":"No limit","Selon GPU":"Depends on GPU","Selon VRAM":"Depends on VRAM","Sur refresh écran":"Match screen refresh","unlimited":"unlimited","Élevée":"High","Épique":"Epic",
+    // pages HTML (h1 / h2 mixtes)
+    "Transforme ta config en <span class=\"accent\">frames</span>.<br>Pas en <span class=\"heat\">regrets</span>.":"Turn your rig into <span class=\"accent\">frames</span>.<br>Not <span class=\"heat\">regrets</span>.",
+    "Gratuit pour commencer.<br>Pas cher pour aller plus loin.":"Free to start.<br>Cheap to go further."
   };
-  const SEL="nav a,.nav-cta,#authBtn,.eyebrow,.section-head h2,.section-head p,.lead,.hero-cta a,.hero-tags span,.ved-head h2,.ved-head p,.ved-tabs button,.ved-cta button,.plan .pname,.plan .pnote,.plan li,.plan-cta-free,#btnPro,#btnElite,.badge,.faq-q,.foot-links a,.soon";
+  window.FF_DICT=DICT;
+  const SEL="nav a,.nav-cta,#authBtn,.eyebrow,.section-head h2,.section-head p,.lead,.hero-cta a,.hero-tags span,.i18n,.ved-head h2,.ved-head p,.ved-tabs button,.ved-cta button,.plan .pname,.plan .pnote,.plan li,.plan-cta-free,#btnPro,#btnElite,.badge,.faq-q,.foot-links a,.soon,"
+    +".feat h3,.feat p,.ix,.cap,.gear-card .gl,.gear-card .gd,.pc-band .ov h3,.pc-band .ov p,.ghead,.gpu-tile figcaption,"
+    +".step h3,.step p,.field>label,.res-toggle button,.cfg-act,.settings-box>.t,.buy-config>.t,.buy-row a,.disclaimer,"
+    +"#shopSel option,.hud-label,.hud-stat .k,.out-mini .k,.strip-item .l,"
+    +".foot-in>.small,.cookie p,.ck-ghost,.ck-ok,.auth-field label,.auth-note,#aiFab span,#aiTiers button,"
+    +".pprice small,.notify-card h2,.notify-card p,#ntBtn,.ved-fps span,.sp-eyebrow";
   function setLang(lang){
     document.querySelectorAll(SEL).forEach(el=>{
       if(el.children.length) return;
@@ -1586,14 +1736,41 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
       if(lang==="en"){ if(DICT[fr]!==undefined) el.textContent=DICT[fr]; }
       else el.textContent=el.dataset.fr;
     });
-    const h1=document.querySelector("h1");
-    if(h1){ if(h1.dataset.fr===undefined)h1.dataset.fr=h1.innerHTML; h1.innerHTML=(lang==="en")?H1_EN:h1.dataset.fr; }
+    document.querySelectorAll(".i18n-html").forEach(el=>{
+      if(el.dataset.fr===undefined) el.dataset.fr=el.innerHTML;
+      const fr=el.dataset.fr;
+      el.innerHTML=(lang==="en" && DICT[fr]!==undefined)?DICT[fr]:el.dataset.fr;
+    });
+    const ATTR=[["#aiText","placeholder"],["#aiSend","aria-label"],["#aiFab","aria-label"],["#aiPanel","aria-label"],
+      ["#aiClose","aria-label"],[".modal-x","aria-label"],["#delProf","title"],["#benchFps","placeholder"],["#benchFps","aria-label"],
+      ["#resToggle","aria-label"],["#vedTabs","aria-label"],["#cookie","aria-label"],
+      [".nav-burger","aria-label"],["nav","aria-label"],["#profSel","aria-label"],["#ntEmail","aria-label"],["#ntEmail","placeholder"]];
+    ATTR.forEach(([sel,attr])=>{
+      document.querySelectorAll(sel).forEach(el=>{
+        const storeAttr="data-frsrc-"+attr;
+        let fr=el.getAttribute(storeAttr);
+        if(fr===null){ fr=el.getAttribute(attr); if(fr===null)return; el.setAttribute(storeAttr,fr); }
+        el.setAttribute(attr,(lang==="en" && DICT[fr]!==undefined)?DICT[fr]:fr);
+      });
+    });
     document.documentElement.lang=lang;
-    const lb=document.getElementById("langBtn"),lbm=document.getElementById("langBtnM");
-    if(lb)lb.textContent=(lang==="en")?"FR":"EN";
+    const lb=document.getElementById("langBtn"),lbm=document.getElementById("langBtnM"),lf=document.getElementById("langFlag");
+    if(lf)lf.textContent=(lang==="en")?"🇫🇷":"🇬🇧";
+    if(lb){lb.childNodes[lb.childNodes.length-1].textContent=(lang==="en")?" FR":" EN";}
     if(lbm)lbm.textContent=(lang==="en")?"Français":"English";
     try{localStorage.setItem("ff_lang",lang);}catch(e){}
+    // re-génère le contenu dynamique dans la nouvelle langue
+    if(window.FF_fillGameSelect)window.FF_fillGameSelect();
+    if(typeof buildCatalog==="function")buildCatalog();
+    if(typeof syncSelects==="function")syncSelects();
+    if(typeof render==="function")render();
+    if(window.FF_renderVed)window.FF_renderVed();
+    if(window.FF_aiRefresh)window.FF_aiRefresh();
+    if(window.FF_authRefresh)window.FF_authRefresh();
+    if(window.FF_legalRefresh)window.FF_legalRefresh();
+    if(window.FF_bootRefresh)window.FF_bootRefresh();
   }
+  window.FF_setLang=setLang;
   function toggle(e){ if(e)e.preventDefault(); const cur=document.documentElement.lang==="en"?"fr":"en"; setLang(cur); }
   const lb=document.getElementById("langBtn"),lbm=document.getElementById("langBtnM");
   if(lb)lb.onclick=toggle; if(lbm)lbm.onclick=toggle;
