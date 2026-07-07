@@ -1,6 +1,6 @@
 // api/me.js — renvoie l'utilisateur connecté et son palier réel (depuis la base).
 import jwt from "jsonwebtoken";
-import { query } from "./db.js";
+import { query } from "./_lib/db.js";
 
 export default async function handler(req, res) {
   const h = req.headers.authorization || "";

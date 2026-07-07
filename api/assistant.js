@@ -7,8 +7,8 @@
 //   GROQ_MODEL   = llama-3.3-70b-versatile   (par défaut ; ex. llama-3.1-8b-instant)
 //
 // Front (prod) -> POST /api/assistant  body:{ messages, tier, ctx }  + header Authorization: Bearer <token utilisateur>
-import { limiteAtteinte, ipDe } from "./ratelimit.js";
-import { tierServeur, tokenDe } from "./tier.js";
+import { limiteAtteinte, ipDe } from "./_lib/ratelimit.js";
+import { tierServeur, tokenDe } from "./_lib/tier.js";
 
 const ORDER = { gratuit: 0, pro: 1, elite: 2 };
 const NAME = ["gratuit", "pro", "elite"];

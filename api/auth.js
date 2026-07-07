@@ -2,9 +2,9 @@
 // POST /api/auth  body: { action:"signup"|"login", email, pseudo?, password }  -> { token, user:{...,tier} }
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { query } from "./db.js";
-import { limiteAtteinte, ipDe } from "./ratelimit.js";
-import { envoyerEmail } from "./email.js";
+import { query } from "./_lib/db.js";
+import { limiteAtteinte, ipDe } from "./_lib/ratelimit.js";
+import { envoyerEmail } from "./_lib/email.js";
 import crypto from "crypto";
 
 async function tierDe(id) {

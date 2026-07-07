@@ -1,7 +1,7 @@
 // api/reinitialiser-mot-de-passe.js — confirme la réinitialisation avec le jeton reçu par email.
 // POST /api/reinitialiser-mot-de-passe  body: { token, password }
 import bcrypt from "bcryptjs";
-import { query } from "./db.js";
+import { query } from "./_lib/db.js";
 import crypto from "crypto";
 
 export default async function handler(req, res) {

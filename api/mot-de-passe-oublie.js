@@ -1,9 +1,9 @@
 // api/mot-de-passe-oublie.js — demande de réinitialisation de mot de passe.
 // POST /api/mot-de-passe-oublie  body: { email }
 // Répond toujours avec succès générique (ne révèle jamais si l'email existe en base).
-import { query } from "./db.js";
-import { envoyerEmail } from "./email.js";
-import { limiteAtteinte, ipDe } from "./ratelimit.js";
+import { query } from "./_lib/db.js";
+import { envoyerEmail } from "./_lib/email.js";
+import { limiteAtteinte, ipDe } from "./_lib/ratelimit.js";
 import crypto from "crypto";
 
 export default async function handler(req, res) {

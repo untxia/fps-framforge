@@ -1,6 +1,6 @@
 // api/webhook.js — webhook Stripe : active le bon palier après paiement. npm i stripe pg
 import Stripe from "stripe";
-import { query } from "./db.js";
+import { query } from "./_lib/db.js";
 
 export const config = { api: { bodyParser: false } };
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);

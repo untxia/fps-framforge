@@ -1,6 +1,6 @@
 // api/verifier-email.js — confirme l'adresse email via le jeton envoyé par email.
 // POST /api/verifier-email  body: { token }
-import { query } from "./db.js";
+import { query } from "./_lib/db.js";
 import crypto from "crypto";
 
 export default async function handler(req, res) {
