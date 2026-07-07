@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIOS MSI : activer XMP/EXPO et Resizable BAR pour gagner des FPS · FRAMEFORGE</title>
+<meta name="description" content="Guide BIOS MSI pas à pas : activer le profil XMP/EXPO de ta RAM, le Resizable BAR et mettre à jour le BIOS en toute sécurité pour maximiser tes FPS.">
+<style>*{margin:0;box-sizing:border-box}body{background:#080b11;color:#e9eef7;font-family:system-ui,sans-serif;line-height:1.7;background-image:linear-gradient(rgba(120,200,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,200,255,.06) 1px,transparent 1px);background-size:54px 54px}.w{max-width:760px;margin:0 auto;padding:44px 20px}h1{font-size:1.8rem;margin-bottom:6px}h2{font-size:1.15rem;color:#19d6ff;margin:28px 0 8px}p,li{color:#c6cfdd;font-size:.95rem}ul,ol{padding-left:22px;margin:8px 0}.mut{color:#8593a8}.warn{border:1px solid rgba(255,122,47,.4);background:rgba(255,122,47,.07);border-radius:10px;padding:14px 16px;margin:18px 0;font-size:.88rem}.k{color:#19d6ff}a{color:#19d6ff}a.back{color:#8593a8;font-size:.85rem;text-decoration:none}.cta{display:inline-block;background:#19d6ff;color:#00121a;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:10px;margin-top:20px}</style></head><body><div class="w">
+<a class="back" href="index.html">← Guides BIOS</a>
+<h1>BIOS <span class="k">MSI</span> — les réglages qui rapportent des FPS</h1>
+<p class="mut">Intitulés donnés à titre indicatif : ils varient légèrement selon le modèle et la version du BIOS.</p>
+<div class="warn">⚠️ <b>Avant de toucher au BIOS</b> : note (ou photographie) tes réglages actuels. En cas de souci, « Load Optimized Defaults » restaure la configuration d'origine. Fais un seul changement à la fois, puis teste la stabilité.</div>
+<h2>1. Entrer dans le BIOS</h2>
+<p>Redémarre et tapote <b>Suppr</b> dès l'allumage pour ouvrir le « Click BIOS 5 ». Appuie sur <b>F7</b> pour basculer entre EZ Mode et mode avancé.</p>
+<h2>2. Activer XMP / EXPO (le gain le plus simple)</h2>
+<p>Par défaut, ta RAM tourne souvent bien en dessous de sa vitesse annoncée. Le profil XMP (Intel) ou EXPO (AMD DDR5) la remet à sa fréquence nominale — gain direct sur les 1% low.</p>
+<p>En EZ Mode, clique le bouton <b>XMP</b> (ou <b>A-XMP</b> sur plateforme AMD) en haut de l'écran. En mode avancé : menu <b>OC</b> → « DRAM Setting » → profil XMP/A-XMP 1. Sauvegarde avec <b>F10</b>.</p>
+<h2>3. Activer le Resizable BAR</h2>
+<p>Permet au processeur d'accéder à toute la mémoire du GPU d'un coup : quelques % de FPS gratuits sur les GPU récents (RTX 3000+/RX 6000+).</p>
+<p>Mode avancé → <b>Settings</b> → <b>Advanced</b> → « PCIe/PCI Sub-system Settings » → active <b>Above 4G memory / Crypto Currency mining</b> puis <b>Re-Size BAR Support</b>. F10 pour sauvegarder.</p>
+<h2>4. Mettre à jour le BIOS (stabilité + performances)</h2>
+<p>Menu <b>M-FLASH</b> (le BIOS redémarre en mode flash) → sélectionne le fichier BIOS sur ta clé USB (FAT32) et valide.</p>
+<p class="mut" style="margin-top:16px">Télécharge toujours le fichier BIOS depuis le site officiel du constructeur, pour ton modèle EXACT de carte mère, et ne coupe jamais l'alimentation pendant la mise à jour.</p>
+<a class="cta" href="/#configurateur">Vérifier mes FPS avec le configurateur →</a>
+</div></body></html>
