@@ -75,8 +75,12 @@ export default async function handler(req, res) {
       headers: { "content-type": "application/json", "authorization": "Bearer " + KEY },
       body: JSON.stringify({ model: MODEL, max_tokens: 1000, messages: msgs }),
     });
-    const data = await r.json();
-    if (!r.ok) return res.status(r.status).json({ error: data.error?.message || "Erreur xAI" });
+    const raw = await r.text();
+    let data; try { data = JSON.parse(raw); } catch (e) { data = null; }
+    if (!r.ok) {
+      console.error("xAI error", r.status, raw);
+      return res.status(r.status).json({ error: data?.error?.message || data?.error || raw.slice(0, 500) || "Erreur xAI" });
+    }
 
     // Réponse normalisée pour le front : { reply }
     const reply = data.choices?.[0]?.message?.content || "";
