@@ -7,9 +7,8 @@
 //   GROQ_MODEL   = llama-3.3-70b-versatile   (par défaut ; ex. llama-3.1-8b-instant)
 //
 // Front (prod) -> POST /api/assistant  body:{ messages, tier, ctx }  + header Authorization: Bearer <token utilisateur>
-import jwt from "jsonwebtoken";
-import { query } from "./db.js";
 import { limiteAtteinte, ipDe } from "./ratelimit.js";
+import { tierServeur, tokenDe } from "./tier.js";
 
 const ORDER = { gratuit: 0, pro: 1, elite: 2 };
 const NAME = ["gratuit", "pro", "elite"];
@@ -27,20 +26,6 @@ function instructions(tier, en) {
   if (tier === "pro")
     return " NIVEAU PRO : réponses détaillées, tous les jeux, réglages BIOS et RAM précis (XMP/EXPO, PBO, timings), comparaisons avant/après.";
   return " NIVEAU GRATUIT : réponses courtes et générales (3-4 phrases). Pour les réglages BIOS détaillés et l'optimisation avancée, invite à passer en Pro (4,99€) ou Elite (9,99€).";
-}
-
-async function tierServeur(token) {
-  if (!token) return "gratuit";
-  try {
-    const p = jwt.verify(token, process.env.JWT_SECRET);
-    const r = await query(
-      `SELECT COALESCE(LOWER(o.nom),'gratuit') AS tier
-         FROM utilisateur u
-         LEFT JOIN abonnement a ON a.id_utilisateur=u.id_utilisateur AND a.statut='actif'
-         LEFT JOIN offre o ON o.id_offre=a.id_offre
-        WHERE u.id_utilisateur=$1 ORDER BY o.niveau DESC NULLS LAST LIMIT 1`, [p.id]);
-    return r.rows[0] ? r.rows[0].tier : "gratuit";
-  } catch (e) { return "gratuit"; }
 }
 
 export default async function handler(req, res) {
@@ -64,9 +49,7 @@ export default async function handler(req, res) {
     if (!Array.isArray(messages)) return res.status(400).json({ error: "messages[] requis" });
 
     // Palier effectif = min(demandé, palier réel en base) -> impossible de tricher côté client
-    const h = req.headers.authorization || "";
-    const token = h.startsWith("Bearer ") ? h.slice(7) : null;
-    const dbTier = await tierServeur(token);
+    const dbTier = await tierServeur(tokenDe(req));
     const eff = NAME[Math.min(ORDER[demande] ?? 0, ORDER[dbTier])];
     const en = lang === "en";
 

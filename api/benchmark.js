@@ -1,7 +1,8 @@
 // api/benchmark.js — FPS réels soumis par la communauté (calibrage du modèle).
-// POST { jeu, gpu, cpu, resolution, preset, fps_moyen, fps_1low? }  (noms — mappés en ids)
-// GET  ?jeu=...&gpu=...  -> moyenne communautaire
+// POST { jeu, gpu, cpu, resolution, preset, fps_moyen, fps_1low? }  (noms — mappés en ids) — ouvert à tous, aide le modèle.
+// GET  ?jeu=...&gpu=...  -> moyenne communautaire réelle, réservée aux comptes Pro/Elite (vérifié côté serveur).
 import { query } from "./db.js";
+import { tierServeur, tokenDe } from "./tier.js";
 
 async function idJeu(nom){ const r=await query(`SELECT id_jeu FROM jeu WHERE nom=$1`,[nom]); return r.rows[0]?.id_jeu; }
 async function idCompo(nom){ const r=await query(`SELECT id_composant FROM composant WHERE nom=$1`,[nom]); return r.rows[0]?.id_composant; }
@@ -24,7 +25,12 @@ export default async function handler(req, res) {
       return res.status(201).json({ ok: true });
     }
     if (req.method === "GET") {
+      const tier = await tierServeur(tokenDe(req));
+      if (tier !== "pro" && tier !== "elite") {
+        return res.status(403).json({ locked: true, error: "Les FPS réels mesurés par la communauté sont réservés aux comptes Pro et Elite." });
+      }
       const { jeu, gpu } = req.query;
+      if (!jeu || !gpu) return res.status(400).json({ error: "jeu et gpu requis" });
       const r = await query(
         `SELECT ROUND(AVG(b.fps_moyen)) AS fps_moyen, ROUND(AVG(b.fps_1low)) AS fps_1low, COUNT(*)::int AS n
            FROM benchmark b

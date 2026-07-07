@@ -419,6 +419,19 @@
             <div><div class="k">Frametime</div><div class="v" style="color:var(--heat)" id="outFt">—</div></div>
           </div>
 
+          <div class="real-fps-box" id="realFpsBox">
+            <div class="t">FPS réels de la communauté</div>
+            <p class="real-fps-msg i18n-html" id="realFpsLocked">🔒 Passe en <a href="#tarifs">Pro ou Elite</a> pour voir les FPS réels mesurés par d'autres joueurs sur cette config.</p>
+            <div class="real-fps-data" id="realFpsData" style="display:none">
+              <div class="out-mini">
+                <div><div class="k i18n">FPS moyen réel</div><div class="v" style="color:var(--good)" id="realFpsAvg">—</div></div>
+                <div><div class="k i18n">1% low réel</div><div class="v" style="color:var(--good)" id="realFpsLow">—</div></div>
+              </div>
+              <div class="real-fps-count" id="realFpsCount"></div>
+            </div>
+            <p class="real-fps-msg i18n" id="realFpsEmpty" style="display:none">Pas encore de mesure communautaire pour ce GPU sur ce jeu — sois le premier à en soumettre une ci-dessous !</p>
+          </div>
+
           <div class="settings-box">
             <div class="t"><span class="i18n">Réglages recommandés ·</span> <span id="setGame">—</span></div>
             <ul id="setList"></ul>
@@ -878,6 +891,33 @@ function render(){
   const hb=document.getElementById("heroBottle");if(hb)hb.textContent=r.bottleneck;
   const hp=document.getElementById("heroPreset");if(hp)hp.textContent=presetName(state.preset).toUpperCase();
   teleTarget=r.fps;
+  refreshRealBenchmark();
+}
+
+/* ====================== FPS RÉELS COMMUNAUTAIRES (perk Pro/Elite) ====================== */
+let realBenchSeq=0;
+async function refreshRealBenchmark(){
+  const box=document.getElementById("realFpsBox"); if(!box)return;
+  const locked=document.getElementById("realFpsLocked"), data=document.getElementById("realFpsData"), empty=document.getElementById("realFpsEmpty");
+  const seq=++realBenchSeq;
+  let token=""; try{token=localStorage.getItem("ff_token")||"";}catch(e){}
+  const headers={}; if(token)headers["authorization"]="Bearer "+token;
+  const jeu=encodeURIComponent(GAMES[state.game].l), gpu=encodeURIComponent(GPUS[state.gpu].l);
+  try{
+    const r=await fetch((FF_CONFIG.apiBase||"")+"/api/benchmark?jeu="+jeu+"&gpu="+gpu,{headers});
+    if(seq!==realBenchSeq)return; // réponse obsolète (l'utilisateur a changé de sélection entre-temps)
+    if(r.status===403){ locked.style.display="block"; data.style.display="none"; empty.style.display="none"; return; }
+    if(!r.ok){ locked.style.display="none"; data.style.display="none"; empty.style.display="none"; return; }
+    const d=await r.json();
+    if(d.n>0){
+      document.getElementById("realFpsAvg").textContent=d.fps_moyen+" fps";
+      document.getElementById("realFpsLow").textContent=(d.fps_1low||"—")+(d.fps_1low?" fps":"");
+      document.getElementById("realFpsCount").textContent="("+d.n+" "+FF_T("mesures communautaires")+")";
+      locked.style.display="none"; empty.style.display="none"; data.style.display="block";
+    }else{
+      locked.style.display="none"; data.style.display="none"; empty.style.display="block";
+    }
+  }catch(e){ if(seq===realBenchSeq){ locked.style.display="none"; data.style.display="none"; empty.style.display="none"; } }
 }
 
 /* ====================== ÉVÉNEMENTS ====================== */
@@ -1802,6 +1842,11 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     "Entre un FPS valide (1 à 2000).":"Enter a valid FPS (1 to 2000).",
     "Merci ! Ta mesure aide toute la communauté.":"Thanks! Your measurement helps the whole community.",
     "Mesure enregistrée localement (démo — backend requis pour l’envoi).":"Measurement saved locally (demo — backend required to submit).",
+    "FPS réels de la communauté":"Real FPS from the community",
+    "🔒 Passe en <a href=\"#tarifs\">Pro ou Elite</a> pour voir les FPS réels mesurés par d'autres joueurs sur cette config.":"🔒 Upgrade to <a href=\"#tarifs\">Pro or Elite</a> to see real FPS measured by other players on this build.",
+    "FPS moyen réel":"Real average FPS","1% low réel":"Real 1% low",
+    "Pas encore de mesure communautaire pour ce GPU sur ce jeu — sois le premier à en soumettre une ci-dessous !":"No community measurement yet for this GPU on this game — be the first to submit one below!",
+    "mesures communautaires":"community measurements",
     // toasts configurateur
     "Lien copié ! Partage-le.":"Link copied! Share it.","Copie ce lien : ":"Copy this link: ",
     "Sauvegarde indisponible dans l'aperçu — OK une fois en ligne.":"Saving unavailable in preview — OK once live.",
@@ -1832,7 +1877,7 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
     +"#shopSel option,.hud-label,.hud-stat .k,.out-mini .k,.strip-item .l,"
     +".foot-in>.small,.cookie p,.ck-ghost,.ck-ok,.auth-field label,.auth-note,#aiFab span,#aiTiers button,"
     +".pprice small,.notify-card h2,.notify-card p,#ntBtn,.ved-fps span,.sp-eyebrow,"
-    +"#authForgotLink,#forgotBack,#forgotSubmit,.auth-forgot-intro,#resetSubmit";
+    +"#authForgotLink,#forgotBack,#forgotSubmit,.auth-forgot-intro,#resetSubmit,.real-fps-box>.t";
   function setLang(lang){
     document.querySelectorAll(SEL).forEach(el=>{
       if(el.children.length) return;
